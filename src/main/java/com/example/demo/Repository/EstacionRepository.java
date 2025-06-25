@@ -17,8 +17,8 @@ public interface EstacionRepository extends JpaRepository<Estacion, Serializable
             "from estacion e \n" +
             "inner join reporteclima r \n" +
                 "on r.RepClimaEstacion = e.EstId\n" +
-            "where r.RepClimaHora = 16 and DATE(r.RepClimaFecha) = CURRENT_DATE()\n" +
+            "where r.RepClimaHora = :hora and DATE(r.RepClimaFecha) = CURRENT_DATE()\n" +
             ";", nativeQuery = true)
-    public List<EstacionDto> getInfoEstaciones();
+    public List<EstacionDto> getInfoEstaciones(int hora);
 
 }
