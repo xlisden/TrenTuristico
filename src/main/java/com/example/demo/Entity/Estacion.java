@@ -9,35 +9,35 @@ public class Estacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EstId")
-    private int EstId;
+    private int id;
 
     @Column(name = "EstNom", length = 100)
-    private String EstNom;
+    private String nombre;
 
     public Estacion() {
         super();
     }
 
-    public Estacion(int estId, String estNom) {
+    public Estacion(int id, String nombre) {
         super();
-        EstId = estId;
-        EstNom = estNom;
+        this.id = id;
+        this.nombre = nombre;
     }
 
-    public int getEstId() {
-        return EstId;
+    public int getId() {
+        return id;
     }
 
-    public void setEstId(int estId) {
-        EstId = estId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getEstNom() {
-        return EstNom;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEstNom(String estNom) {
-        EstNom = estNom;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

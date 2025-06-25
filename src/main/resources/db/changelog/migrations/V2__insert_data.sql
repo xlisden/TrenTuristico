@@ -26,10 +26,10 @@ INSERT INTO Actividad (ActNombre) VALUES
     ('Senderismo'),
     ('Escalar'), /* 3 */
     ('Turismo de aventura'),
-    ('Turismo Cultural'),
+    ('Turismo cultural'),
     ('Surfear'), /* 6 */
     ('Cata de vinos'),
-    ('Turismo Recreativo'); /* 8 */
+    ('Turismo recreativo'); /* 8 */
 
 INSERT INTO Usuario (UserDni, UserNombre, UserApPaterno, UserApMaterno, UserUsername, UserPassword, UserActivo) VALUES
     ('71994256',

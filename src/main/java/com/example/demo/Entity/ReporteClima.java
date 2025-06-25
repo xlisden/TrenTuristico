@@ -22,7 +22,7 @@ public class ReporteClima {
 
     @NotNull
     @Column(name = "RepClimaHora", nullable = false)
-    private int fora;
+    private int hora;
 
     @NotNull
     @Column(name = "RepClimaTemp", nullable = false)
