@@ -24,8 +24,9 @@ public class EstacionService implements IEstacionService {
         List<EstacionDto> estaciones = estacionRepository.getInfoEstaciones(hora);
 
         for(EstacionDto estacion : estaciones){
-            System.err.println("url = " + getUrl(estacion.getIdEstacion(), hora));
+            estacion.setIcono(getUrl(estacion.getIdEstacion(), hora));
         }
+
         return estaciones;
     }
 

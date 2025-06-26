@@ -1,18 +1,21 @@
 package com.example.demo.Entity.Helpers;
 
+import lombok.Data;
+
+@Data
 public class Filtros {
 
-    boolean caminata;
-    boolean senderismo;
-    boolean escalar;
-    boolean aventura;
-    boolean cultural;
-    boolean surfear;
-    boolean cata;
-    boolean recreativo;
+    boolean caminata = false;
+    boolean senderismo = false;
+    boolean escalar= false;
+    boolean aventura= false;
+    boolean cultural= false;
+    boolean surfear= false;
+    boolean cata= false;
+    boolean recreativo= false;
 
-    boolean soleado;
-    boolean nublado;
-    boolean lluviaLigera;
+    boolean soleado= false;
+    boolean nublado= false;
+    boolean lluviaLigera= false;
 
 }
