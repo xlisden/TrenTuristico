@@ -45,7 +45,7 @@ INSERT INTO ZonaTuristica (ZonaNombre, ZonaTiempoLlegada, ZonaTiempoRecorrido, Z
     ('Museo Convento San Francisco y Catacumbas', 15, 40, 1, 5, 5, 2,1),
     ('Museo de Arte', 5, 40, 1, 6, 5, 2,1),
     ('Parque de la Amistad', 10, 30, 1,  11, 1, 1,1),
-    ('Parque ecológico Voces por el Clima', 10, 25, 1, 12, 1, 1,1),
+    ('Parque ecológico Voces por el AyudaClima', 10, 25, 1, 12, 1, 1,1),
     ('Lomas del Paraíso', 15, 40, 1, 5, 4, 1,1),
     ('Circuito mágico del agua', 15, 20, 1, 6, 8, 1,1),
     ('Parque de las Leyendas', 20, 90, 1, 6, 8, 1,1),
