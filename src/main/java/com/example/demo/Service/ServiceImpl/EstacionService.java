@@ -39,9 +39,9 @@ public class EstacionService implements IEstacionService {
 
         if (intensidad == 0) {
             if (temp < 16)
-                return esDeDia ? "/icons/static/nublado.svg" : "/icons/static/noche-nublada.svg";
+                return esDeDia ? "/icons/clima/static/nublado.svg" : "/icons/clima/static/noche-nublada.svg";
             else
-                return esDeDia ? "/icons/static/day.svg" : "/icons/static/night.svg";
+                return esDeDia ? "/icons/clima/static/day.svg" : "/icons/clima/static/night.svg";
         }
 
         if (intensidad >= 1 && intensidad <= 3) {
@@ -49,45 +49,45 @@ public class EstacionService implements IEstacionService {
                 if (temp < 20) {
                     if (probabilidad < 30) {
                         switch (intensidad) {
-                            case 1: return "/icons/static/sol-nubladosuave.svg";
-                            case 2: return "/icons/static/sol-nublado.svg";
-                            case 3: return "/icons/static/sol-nubladofuerte.svg";
+                            case 1: return "/icons/clima/static/sol-nubladosuave.svg";
+                            case 2: return "/icons/clima/static/sol-nublado.svg";
+                            case 3: return "/icons/clima/static/sol-nubladofuerte.svg";
                         }
                     } else {
                         switch (intensidad) {
-                            case 1: return "/icons/static/garua.svg";
-                            case 2: return "/icons/static/lluviasuave-2.svg";
-                            case 3: return "/icons/static/lluvia-3.svg";
+                            case 1: return "/icons/clima/static/garua.svg";
+                            case 2: return "/icons/clima/static/lluviasuave-2.svg";
+                            case 3: return "/icons/clima/static/lluvia-3.svg";
                         }
                     }
                 } else {
                     switch (intensidad) {
-                        case 1: return "/icons/static/sol-lluviasuave-1.svg";
-                        case 2: return "/icons/static/massol-lluviasuave-2.svg";
-                        case 3: return "/icons/static/sol-lluviasuave-2.svg";
+                        case 1: return "/icons/clima/static/sol-lluviasuave-1.svg";
+                        case 2: return "/icons/clima/static/massol-lluviasuave-2.svg";
+                        case 3: return "/icons/clima/static/sol-lluviasuave-2.svg";
                     }
                 }
             } else {
                 if (probabilidad < 30) {
                     switch (intensidad) {
-                        case 1: return "/icons/static/noche-nubladasuave.svg";
-                        case 2: return "/icons/static/noche-nublada.svg";
-                        case 3: return "/icons/static/noche-nubladafuerte.svg";
+                        case 1: return "/icons/clima/static/noche-nubladasuave.svg";
+                        case 2: return "/icons/clima/static/noche-nublada.svg";
+                        case 3: return "/icons/clima/static/noche-nubladafuerte.svg";
                     }
                 } else {
                     switch (intensidad) {
-                        case 1: return "/icons/static/garua.svg";
-                        case 2: return "/icons/static/lluviasuave-2.svg";
-                        case 3: return "/icons/static/lluvia-3.svg";
+                        case 1: return "/icons/clima/static/garua.svg";
+                        case 2: return "/icons/clima/static/lluviasuave-2.svg";
+                        case 3: return "/icons/clima/static/lluvia-3.svg";
                     }
                 }
             }
         }
 
         if (intensidad > 3)
-            return "/icons/static/tormentas.svg";
+            return "/icons/clima/static/tormentas.svg";
 
-        return "/icons/static/weather.svg";
+        return "/icons/clima/static/weather.svg";
     }
 
     public int getHora() {
