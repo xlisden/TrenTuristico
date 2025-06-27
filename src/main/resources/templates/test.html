@@ -1,91 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="importmap">
-        {
-          "imports": {
-            "@material/web/": "https://esm.run/@material/web/"
-          }
-        }
-    </script>
-    <script type="module">
-        import '@material/web/all.js';
-        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    </script>
-    <style>
-        :root {
-            --md-sys-color-primary: rgb(59 105 58);
-            --md-sys-color-surface-tint: rgb(59 105 58);
-            --md-sys-color-on-primary: rgb(255 255 255);
-            --md-sys-color-primary-container: rgb(188 240 180);
-            --md-sys-color-on-primary-container: rgb(35 80 36);
-            --md-sys-color-secondary: rgb(82 99 79);
-            --md-sys-color-on-secondary: rgb(255 255 255);
-            --md-sys-color-secondary-container: rgb(213 232 207);
-            --md-sys-color-on-secondary-container: rgb(59 75 56);
-            --md-sys-color-tertiary: rgb(56 101 106);
-            --md-sys-color-on-tertiary: rgb(255 255 255);
-            --md-sys-color-tertiary-container: rgb(188 235 241);
-            --md-sys-color-on-tertiary-container: rgb(31 77 82);
-            --md-sys-color-error: rgb(186 26 26);
-            --md-sys-color-on-error: rgb(255 255 255);
-            --md-sys-color-error-container: rgb(255 218 214);
-            --md-sys-color-on-error-container: rgb(147 0 10);
-            --md-sys-color-background: rgb(247 251 241);
-            --md-sys-color-on-background: rgb(25 29 23);
-            --md-sys-color-surface: rgb(247 251 241);
-            --md-sys-color-on-surface: rgb(25 29 23);
-            --md-sys-color-surface-variant: rgb(222 229 216);
-            --md-sys-color-on-surface-variant: rgb(66 73 64);
-            --md-sys-color-outline: rgb(114 121 111);
-            --md-sys-color-outline-variant: rgb(194 201 189);
-            --md-sys-color-shadow: rgb(0 0 0);
-            --md-sys-color-scrim: rgb(0 0 0);
-            --md-sys-color-inverse-surface: rgb(45 50 44);
-            --md-sys-color-inverse-on-surface: rgb(238 242 233);
-            --md-sys-color-inverse-primary: rgb(161 211 154);
-            --md-sys-color-primary-fixed: rgb(188 240 180);
-            --md-sys-color-on-primary-fixed: rgb(0 34 4);
-            --md-sys-color-primary-fixed-dim: rgb(161 211 154);
-            --md-sys-color-on-primary-fixed-variant: rgb(35 80 36);
-            --md-sys-color-secondary-fixed: rgb(213 232 207);
-            --md-sys-color-on-secondary-fixed: rgb(16 31 16);
-            --md-sys-color-secondary-fixed-dim: rgb(185 204 179);
-            --md-sys-color-on-secondary-fixed-variant: rgb(59 75 56);
-            --md-sys-color-tertiary-fixed: rgb(188 235 241);
-            --md-sys-color-on-tertiary-fixed: rgb(0 32 35);
-            --md-sys-color-tertiary-fixed-dim: rgb(160 207 212);
-            --md-sys-color-on-tertiary-fixed-variant: rgb(31 77 82);
-            --md-sys-color-surface-dim: rgb(216 219 210);
-            --md-sys-color-surface-bright: rgb(247 251 241);
-            --md-sys-color-surface-container-lowest: rgb(255 255 255);
-            --md-sys-color-surface-container-low: rgb(241 245 236);
-            --md-sys-color-surface-container: rgb(236 239 230);
-            --md-sys-color-surface-container-high: rgb(230 233 224);
-            --md-sys-color-surface-container-highest: rgb(224 228 219);
-        }
-
-        .parent {
-            width: 100%;
-            padding-left: 8rem;
-            margin: 16rem;
-        }
-    </style>
-</head>
+<head th:replace="~{compartidos/head :: head()}"></head>
 <body>
+<style>
+    .chip-checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
 
-<div class="parent">
-    <h1 class="md-typescale-display-medium">Hello Material!</h1>
-    <form>
-        <md-filter-chip label="Caminata" th:selected="${filtros.isAventura()}"></md-filter-chip>
-        <md-filter-chip label="Senderismo" th:selected="${filtros.isCultural()}"></md-filter-chip>
+    .chip-item input[type="checkbox"] {
+        display: none;
+    }
 
-        <md-outlined-button type="submit">Filtrar</md-outlined-button>
-    </form>
-<!--    Caminata, Senderismo, Escalar, Turismo de aventura, Turismo cultural, Surfear, Cata de vinos, Turismo recreativo  y tipo de clima soleado, nublado, lluvia ligera    -->
-</div>
+    .chip-checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        height: 32px;
+        padding: 0 16px;
+        font-size: 14px;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 8px;
+        border: 0.5px solid #a7aca7;
+        color: #49454F;
+        background-color: #FFFFFF;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        user-select: none;
+    }
+
+    .chip-checkbox-group label:hover {
+        background-color: #F7F2FA;
+    }
+
+    .chip-item input[type="checkbox"]:checked ~ label {
+        background-color: #bccfa1;
+        color: #1a2516;
+        border-color: transparent;
+    }
+
+    .boton {
+        margin-top: 1rem;
+    }
+</style>
+<form method="post" th:object="${filtros}" action="/test/procesar" class="form-container parent">
+
+    <h2 class="md-typescale-title-large">Actividades</h2>
+    <div class="chip-checkbox-group">
+        <div class="chip-item">
+            <input type="checkbox" id="caminata" th:field="*{caminata}">
+            <label for="caminata">Caminata</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="senderismo" th:field="*{senderismo}">
+            <label for="senderismo">Senderismo</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="escalar" th:field="*{escalar}">
+            <label for="escalar">Escalar</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="aventura" th:field="*{aventura}">
+            <label for="aventura">Aventura</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="cultural" th:field="*{cultural}">
+            <label for="cultural">T. Cultural</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="surfear" th:field="*{surfear}">
+            <label for="surfear">Surfear</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="cata" th:field="*{cata}">
+            <label for="cata">Cata de vinos</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="recreativo" th:field="*{recreativo}">
+            <label for="recreativo">T. Recreativo</label>
+        </div>
+    </div>
+
+    <h2 class="md-typescale-title-large">Clima</h2>
+    <div class="chip-checkbox-group">
+        <div class="chip-item">
+            <input type="checkbox" id="soleado" th:field="*{soleado}">
+            <label for="soleado">Soleado</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="nublado" th:field="*{nublado}">
+            <label for="nublado">Nublado</label>
+        </div>
+
+        <div class="chip-item">
+            <input type="checkbox" id="lluviaLigera" th:field="*{lluviaLigera}">
+            <label for="lluviaLigera">Lluvia ligera</label>
+        </div>
+    </div>
+
+    <md-filled-button type="submit" class="boton">Aplicar Filtros</md-filled-button>
+</form>
 </body>
 </html>

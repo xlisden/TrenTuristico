@@ -1,0 +1,76 @@
+<head th:fragment="head()">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+          "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+          }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <style>
+        :root {
+            --md-sys-color-primary: rgb(52 87 0);
+            --md-sys-color-surface-tint: rgb(64 105 0);
+            --md-sys-color-on-primary: rgb(255 255 255);
+            --md-sys-color-primary-container: rgb(69 113 0);
+            --md-sys-color-on-primary-container: rgb(190 244 125);
+            --md-sys-color-secondary: rgb(81 101 56);
+            --md-sys-color-on-secondary: rgb(255 255 255);
+            --md-sys-color-secondary-container: rgb(211 235 178);
+            --md-sys-color-on-secondary-container: rgb(87 107 61);
+            --md-sys-color-tertiary: rgb(0 89 67);
+            --md-sys-color-on-tertiary: rgb(255 255 255);
+            --md-sys-color-tertiary-container: rgb(0 116 88);
+            --md-sys-color-on-tertiary-container: rgb(155 246 211);
+            --md-sys-color-error: rgb(186 26 26);
+            --md-sys-color-on-error: rgb(255 255 255);
+            --md-sys-color-error-container: rgb(255 218 214);
+            --md-sys-color-on-error-container: rgb(147 0 10);
+            --md-sys-color-background: rgb(249 251 237);
+            --md-sys-color-on-background: rgb(25 29 21);
+            --md-sys-color-surface: rgb(249 251 237);
+            --md-sys-color-on-surface: rgb(25 29 21);
+            --md-sys-color-surface-variant: rgb(223 229 208);
+            --md-sys-color-on-surface-variant: rgb(67 73 57);
+            --md-sys-color-outline: rgb(115 121 104);
+            --md-sys-color-outline-variant: rgb(195 201 181);
+            --md-sys-color-shadow: rgb(0 0 0);
+            --md-sys-color-scrim: rgb(0 0 0);
+            --md-sys-color-inverse-surface: rgb(46 50 41);
+            --md-sys-color-inverse-on-surface: rgb(240 242 229);
+            --md-sys-color-inverse-primary: rgb(162 214 99);
+            --md-sys-color-primary-fixed: rgb(189 243 124);
+            --md-sys-color-on-primary-fixed: rgb(16 32 0);
+            --md-sys-color-primary-fixed-dim: rgb(162 214 99);
+            --md-sys-color-on-primary-fixed-variant: rgb(47 79 0);
+            --md-sys-color-secondary-fixed: rgb(211 235 178);
+            --md-sys-color-on-secondary-fixed: rgb(16 32 0);
+            --md-sys-color-secondary-fixed-dim: rgb(183 206 152);
+            --md-sys-color-on-secondary-fixed-variant: rgb(58 76 34);
+            --md-sys-color-tertiary-fixed: rgb(153 244 209);
+            --md-sys-color-on-tertiary-fixed: rgb(0 33 23);
+            --md-sys-color-tertiary-fixed-dim: rgb(125 216 182);
+            --md-sys-color-on-tertiary-fixed-variant: rgb(0 81 61);
+            --md-sys-color-surface-dim: rgb(217 219 206);
+            --md-sys-color-surface-bright: rgb(249 251 237);
+            --md-sys-color-surface-container-lowest: rgb(255 255 255);
+            --md-sys-color-surface-container-low: rgb(243 245 231);
+            --md-sys-color-surface-container: rgb(237 239 226);
+            --md-sys-color-surface-container-high: rgb(231 233 220);
+            --md-sys-color-surface-container-highest: rgb(226 228 215);
+        }
+
+        .parent {
+            width: fit-content;
+            margin: 3rem 6rem;
+        }
+    </style>
+</head>
