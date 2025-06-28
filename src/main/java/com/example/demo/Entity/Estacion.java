@@ -11,7 +11,7 @@ public class Estacion {
     @Column(name = "EstId")
     private int id;
 
-    @Column(name = "EstNom", length = 100)
+    @Column(name = "EstNombre", length = 100)
     private String nombre;
 
     public Estacion() {

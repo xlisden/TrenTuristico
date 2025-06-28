@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
-import com.example.demo.Entity.Helpers.EstacionDto;
-import org.springframework.stereotype.Component;
+import com.example.demo.Entity.dto.EstacionDto;
 
 import java.util.List;
 

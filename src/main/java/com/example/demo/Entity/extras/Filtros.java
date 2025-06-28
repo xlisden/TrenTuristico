@@ -1,4 +1,4 @@
-package com.example.demo.Entity.Helpers;
+package com.example.demo.Entity.extras;
 
 import lombok.Data;
 

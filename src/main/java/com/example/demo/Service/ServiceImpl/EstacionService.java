@@ -1,7 +1,7 @@
 package com.example.demo.Service.ServiceImpl;
 
-import com.example.demo.Entity.Helpers.AyudaClima;
-import com.example.demo.Entity.Helpers.EstacionDto;
+import com.example.demo.Entity.extras.AyudaClima;
+import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Repository.EstacionRepository;
 import com.example.demo.Repository.ReporteClimaRepository;
 import com.example.demo.Service.IEstacionService;
@@ -16,11 +16,12 @@ import org.springframework.stereotype.Service;
 public class EstacionService implements IEstacionService {
 
     private final EstacionRepository estacionRepository;
+    private final UtilsServcice utilsServcice;
     private final ReporteClimaRepository reporteClimaRepository;
 
     @Override
     public List<EstacionDto> getInfoEstaciones() {
-        int hora = getHora();
+        int hora = utilsServcice.getHora();
         List<EstacionDto> estaciones = estacionRepository.getInfoEstaciones(hora);
 
         for(EstacionDto estacion : estaciones){
@@ -31,77 +32,14 @@ public class EstacionService implements IEstacionService {
     }
 
     public String getUrl(int idEstacion, int hora) {
-        AyudaClima clima = reporteClimaRepository.getClima(idEstacion, hora);
+        AyudaClima clima = reporteClimaRepository.getClimaPorEstacionHora(idEstacion, hora);
         boolean esDeDia = hora < 16;
-        double temp = clima.getTemperatura();
+        double temperatura = clima.getTemperatura();
         int intensidad = (int) clima.getIntensidad();
         int probabilidad = clima.getProbabilidad();
 
-        if (intensidad == 0) {
-            if (temp < 16)
-                return esDeDia ? "/icons/clima/static/nublado.svg" : "/icons/clima/static/noche-nublada.svg";
-            else
-                return esDeDia ? "/icons/clima/static/day.svg" : "/icons/clima/static/night.svg";
-        }
-
-        if (intensidad >= 1 && intensidad <= 3) {
-            if (esDeDia) {
-                if (temp < 20) {
-                    if (probabilidad < 30) {
-                        switch (intensidad) {
-                            case 1: return "/icons/clima/static/sol-nubladosuave.svg";
-                            case 2: return "/icons/clima/static/sol-nublado.svg";
-                            case 3: return "/icons/clima/static/sol-nubladofuerte.svg";
-                        }
-                    } else {
-                        switch (intensidad) {
-                            case 1: return "/icons/clima/static/garua.svg";
-                            case 2: return "/icons/clima/static/lluviasuave-2.svg";
-                            case 3: return "/icons/clima/static/lluvia-3.svg";
-                        }
-                    }
-                } else {
-                    switch (intensidad) {
-                        case 1: return "/icons/clima/static/sol-lluviasuave-1.svg";
-                        case 2: return "/icons/clima/static/massol-lluviasuave-2.svg";
-                        case 3: return "/icons/clima/static/sol-lluviasuave-2.svg";
-                    }
-                }
-            } else {
-                if (probabilidad < 30) {
-                    switch (intensidad) {
-                        case 1: return "/icons/clima/static/noche-nubladasuave.svg";
-                        case 2: return "/icons/clima/static/noche-nublada.svg";
-                        case 3: return "/icons/clima/static/noche-nubladafuerte.svg";
-                    }
-                } else {
-                    switch (intensidad) {
-                        case 1: return "/icons/clima/static/garua.svg";
-                        case 2: return "/icons/clima/static/lluviasuave-2.svg";
-                        case 3: return "/icons/clima/static/lluvia-3.svg";
-                    }
-                }
-            }
-        }
-
-        if (intensidad > 3)
-            return "/icons/clima/static/tormentas.svg";
-
-        return "/icons/clima/static/weather.svg";
+        return utilsServcice.getUrl(esDeDia, temperatura, intensidad, probabilidad);
     }
 
-    public int getHora() {
-        int horaInicial = LocalDateTime.now().getHour();
-        if (horaInicial < 10)
-            return 7;
-        else if (horaInicial >= 10 && horaInicial < 13)
-            return 10;
-        else if (horaInicial >= 13 && horaInicial < 16)
-            return 13;
-        else if (horaInicial >= 16 && horaInicial < 19)
-            return 16;
-        else if (horaInicial >= 19)
-            return 19;
-        return 0;
-    }
+
 }
