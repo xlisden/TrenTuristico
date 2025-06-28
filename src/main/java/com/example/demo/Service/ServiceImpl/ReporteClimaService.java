@@ -4,7 +4,6 @@ import com.example.demo.Entity.dto.PronosticoClimaDto;
 import com.example.demo.Entity.dto.PronosticoDia;
 import com.example.demo.Entity.dto.PronosticoEstacion;
 import com.example.demo.Entity.dto.PronosticoHora;
-import com.example.demo.Entity.extras.AyudaClima;
 import com.example.demo.Entity.extras.AyudaEstacion;
 import com.example.demo.Entity.extras.ReporteClimaQuery;
 import com.example.demo.Entity.extras.Utils;
@@ -15,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,10 +51,7 @@ public class ReporteClimaService implements IReporteClimaService {
                     for(ReporteClimaQuery reporte: reportes) {
                         if (reporte.getFecha().equals(semanaFechas.get(i))) {
                             PronosticoHora hora = new PronosticoHora();
-                            hora.url = getUrl(estacion.id, reporte.hora, reporte.temperatura, reporte.intensidad, reporte.probabilidad);
-                            log.debug("HORA");
-                            System.out.println("reporte.hora = " + reporte.hora);
-                            System.out.println("format.format(reporte.hora) = " + String.format("%02d:%02d", reporte.hora, 0));
+                            hora.url = getUrl(reporte.hora, reporte.temperatura, reporte.intensidad, reporte.probabilidad);
                             hora.hora = String.format("%02d:%02d", reporte.hora, 0);
                             hora.temperatura = reporte.temperatura;
                             pronosticoHoras.add(hora);
@@ -78,7 +73,7 @@ public class ReporteClimaService implements IReporteClimaService {
         return pronosticoClima;
     }
 
-    public String getUrl(int idEstacion, int hora, double temperatura, double intensidad, int probabilidad) {
+    public String getUrl(int hora, double temperatura, double intensidad, int probabilidad) {
         boolean esDeDia = hora < 16;
 
         return utilsServcice.getUrl(esDeDia, temperatura, (int)intensidad, probabilidad);
