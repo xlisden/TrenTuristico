@@ -25,8 +25,9 @@ public class EstacionesController {
 
             return estacionService.getInfoEstaciones();
         } catch (Exception e) {
-            return new ArrayList<>();
+            e.printStackTrace();
         }
+        return null;
     }
 
 }

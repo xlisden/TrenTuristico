@@ -22,8 +22,9 @@ public class ReporteClimaController {
         try {
             return reporteClimaService.getPronosticoClima();
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
         }
+        return null;
     }
 
 }

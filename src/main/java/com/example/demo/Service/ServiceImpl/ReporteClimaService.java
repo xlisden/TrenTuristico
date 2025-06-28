@@ -28,47 +28,44 @@ public class ReporteClimaService implements IReporteClimaService {
 
     public PronosticoClimaDto getPronosticoClima() {
         PronosticoClimaDto pronosticoClima = new PronosticoClimaDto();
-        
+        List<AyudaEstacion> estaciones = estacionRepository.getAll();
+        List<String> semanaFechas = reporteClimaRepository.getSemana();
+        List<PronosticoDia> semana = new ArrayList<>();
+
         pronosticoClima.semana = new ArrayList<>();
-        try {
-            List<AyudaEstacion> estaciones = estacionRepository.getAll();
-            List<String> semanaFechas = reporteClimaRepository.getSemana();
-            List<PronosticoDia> semana = new ArrayList<>();
 
-            for(int i=0; i<semanaFechas.size(); i++) {
-                PronosticoDia pronosticoDia = new PronosticoDia();
-                pronosticoDia.dia = Utils.climaFrontDias.get(i);
-                pronosticoDia.fecha = semanaFechas.get(i);
+        for (int i = 0; i < semanaFechas.size(); i++) {
+            PronosticoDia pronosticoDia = new PronosticoDia();
+            List<PronosticoEstacion> pronosticoEstaciones = new ArrayList<>();
 
-                List<PronosticoEstacion> pronosticoEstaciones = new ArrayList<>();
+            pronosticoDia.dia = Utils.climaFrontDias.get(i);
+            pronosticoDia.fecha = semanaFechas.get(i);
 
-                for (AyudaEstacion estacion : estaciones) {
-                    PronosticoEstacion pronosticoEstacion = new PronosticoEstacion();
-                    List<PronosticoHora> pronosticoHoras = new ArrayList<>();
-                    List<ReporteClimaQuery> reportes = reporteClimaRepository.getClimaPorEstacion(estacion.id);
+            for (AyudaEstacion estacion : estaciones) {
+                PronosticoEstacion pronosticoEstacion = new PronosticoEstacion();
+                List<PronosticoHora> pronosticoHoras = new ArrayList<>();
+                List<ReporteClimaQuery> reportes = reporteClimaRepository.getClimaPorEstacion(estacion.id);
 
-                    pronosticoEstacion.estacion = estacion.nombre;
-                    for(ReporteClimaQuery reporte: reportes) {
-                        if (reporte.getFecha().equals(semanaFechas.get(i))) {
-                            PronosticoHora hora = new PronosticoHora();
-                            hora.url = getUrl(reporte.hora, reporte.temperatura, reporte.intensidad, reporte.probabilidad);
-                            hora.hora = String.format("%02d:%02d", reporte.hora, 0);
-                            hora.temperatura = reporte.temperatura;
-                            pronosticoHoras.add(hora);
-                        }
+                pronosticoEstacion.estacion = estacion.nombre;
+
+                for (ReporteClimaQuery reporte : reportes) {
+                    if (reporte.getFecha().equals(semanaFechas.get(i))) {
+                        PronosticoHora hora = new PronosticoHora();
+
+                        hora.url = getUrl(reporte.hora, reporte.temperatura, reporte.intensidad, reporte.probabilidad);
+                        hora.hora = String.format("%02d:%02d", reporte.hora, 0);
+                        hora.temperatura = reporte.temperatura;
+
+                        pronosticoHoras.add(hora);
                     }
-                    pronosticoEstacion.horario = pronosticoHoras;
-                    pronosticoEstaciones.add(pronosticoEstacion);
                 }
-                pronosticoDia.estaciones = pronosticoEstaciones;
-                semana.add(pronosticoDia);
+                pronosticoEstacion.horario = pronosticoHoras;
+                pronosticoEstaciones.add(pronosticoEstacion);
             }
-
-            pronosticoClima.semana = semana;
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            pronosticoDia.estaciones = pronosticoEstaciones;
+            semana.add(pronosticoDia);
         }
+        pronosticoClima.semana = semana;
 
         return pronosticoClima;
     }
@@ -76,7 +73,7 @@ public class ReporteClimaService implements IReporteClimaService {
     public String getUrl(int hora, double temperatura, double intensidad, int probabilidad) {
         boolean esDeDia = hora < 16;
 
-        return utilsServcice.getUrl(esDeDia, temperatura, (int)intensidad, probabilidad);
+        return utilsServcice.getUrl(esDeDia, temperatura, (int) intensidad, probabilidad);
     }
 
 }
