@@ -32,13 +32,8 @@ INSERT INTO Actividad (ActNombre) VALUES
     ('Turismo recreativo'); /* 8 */
 
 INSERT INTO Usuario (UserDni, UserNombre, UserApPaterno, UserApMaterno, UserUsername, UserPassword, UserActivo) VALUES
-    ('71994256',
-     'Hamid Farid',
-     'Rivera',
-     'Gonzales',
-     'admin',
-     '$2a$10$0KI/OFNKFtYxNWKAUbte2Oh3AwOhB7B3gJS.BqdMv/GqnR4si5vtS',
-     1);
+    ('71994256', 'Hamid Farid', 'Rivera', 'Gonzales', 'admin', '$2a$10$8cTkEYrA8s2QFKXglJpmeOLfWCM5blCX8qcpHxBT4Q9tReCKFkRQK', 1),
+    ('73234232', 'Dayenira', 'Delgado', 'Esteban', 'developer', '$2a$10$ulFnYK4tm80usL.PTjVyoeIs2PJAz8sFWWS7cjpKOk3alSkZi.JnS', 1);
 
 INSERT INTO ZonaTuristica (ZonaNombre, ZonaTiempoLlegada, ZonaTiempoRecorrido, ZonaActivo, ZonaEstacion, ZonaActividad, ZonaTipoLugar, ZonaCreadoPor) VALUES
     ('Club zonal Huiracocha', 10, 60, 1, 2, 8, 1,1),
@@ -54,10 +49,10 @@ INSERT INTO ZonaTuristica (ZonaNombre, ZonaTiempoLlegada, ZonaTiempoRecorrido, Z
     ('Larcomar', 20, 30, 1, 10, 1, 1,1),
     ('Restaurante Amoramar', 25, 20, 1, 11, 7, 1,1),
     ('Las Viñas', 25, 20, 1, 10, 3, 2,1),
-    ('Playa La Herradura', 15, 40, 1, 12, 6, 1,1),
-    ('PLaya La Pampilla', 30, 40, 1, 1, 6, 1,1),
-    ('Parque ecológico de La Molina', 20, 40, 1, 1, 2, 1,1),
-    ('PLaya Makaha', 10, 40, 1, 10, 6, 1,1),
-    ('Museo Naval del Perú', 30, 30, 1, 1, 5, 2,1),
-    ('El Callao Monumental', 20, 40, 1, 11, 5, 2,1),
-    ('La Granja Villa', 30, 60, 1, 14, 8, 1,1);
+    ('Playa La Herradura', 15, 40, 1, 12, 6, 1,2),
+    ('PLaya La Pampilla', 30, 40, 1, 1, 6, 1,2),
+    ('Parque ecológico de La Molina', 20, 40, 1, 1, 2, 1,2),
+    ('PLaya Makaha', 10, 40, 1, 10, 6, 1,2),
+    ('Museo Naval del Perú', 30, 30, 1, 1, 5, 2,2),
+    ('El Callao Monumental', 20, 40, 1, 11, 5, 2,2),
+    ('La Granja Villa', 30, 60, 1, 14, 8, 1,2);
