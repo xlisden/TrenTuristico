@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Entity.extras.Filtros;
 import com.example.demo.Service.IEstacionService;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/estaciones")
@@ -24,6 +20,7 @@ public class EstacionesController {
         ModelAndView mav = new ModelAndView("estaciones/estaciones");
         try {
             Filtros filtros = new Filtros();
+            filtros.setCataVinos(true);
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estacionService.getInfoEstaciones());
         } catch (Exception e) {

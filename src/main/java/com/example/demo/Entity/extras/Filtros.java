@@ -11,7 +11,7 @@ public class Filtros {
     boolean aventura= false;
     boolean cultural= false;
     boolean surfear= false;
-    boolean cata= false;
+    boolean cataVinos = false;
     boolean recreativo= false;
 
     boolean soleado= false;

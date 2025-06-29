@@ -1,172 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Filtros Flotantes</title>
-    <style>
-        .floating-filters {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100vw;
-            z-index: 1000;
-            background: #fff;
-            box-shadow: 0 6px 32px rgba(0,0,0,0.10);
-            padding: 18px 0 10px 0;
-            /* Sin border-radius, para llegar a los bordes */
-            display: flex;
-            justify-content: center;
-        }
+<div th:replace="~{compartidos/head :: head()}"></div>
+<style>
+    .floating-filters {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        z-index: 1000;
+        background: #fff;
+        box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+        padding: 18px 0 10px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .floating-filters-row {
+        display: flex;
+        flex-direction: row;
+        gap: 38px;
+        width: 100%;
+        max-width: 1100px;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .section-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 180px;
+    }
+
+    .boton-block {
+        align-items: center !important;
+        justify-content: flex-end !important;
+        min-width: 90px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-family: 'Roboto', Arial, sans-serif;
+    }
+
+    .chip-checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .chip-item input[type="checkbox"] {
+        display: none;
+    }
+
+    .chip-checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 10px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 7px;
+        border: 0.5px solid #a7aca7;
+        color: #49454F;
+        background-color: #FFFFFF;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+        user-select: none;
+    }
+    .chip-checkbox-group label:hover {
+        background-color: #F7F2FA;
+    }
+    .chip-item input[type="checkbox"]:checked ~ label {
+        background-color: #bccfa1;
+        color: #1a2516;
+        border-color: transparent;
+    }
+
+    .boton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #46630a;
+        color: white;
+        border: none;
+        border-radius: 999px;
+        height: 34px;
+        width: 60px;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-left: 18px;
+        margin-bottom: 0.5rem;
+    }
+    .boton:hover {
+        background: #344a07;
+    }
+    .boton svg {
+        width: 20px;
+        height: 20px;
+    }
+    @media (max-width: 700px) {
         .floating-filters-row {
-            display: flex;
-            flex-direction: row;
-            gap: 38px; /* Espacio entre bloques */
-            width: 100%;
-            max-width: 1100px; /* Opcional: para que no se vea demasiado estirado en pantallas grandes */
-            justify-content: center;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
         }
         .section-block {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            min-width: 180px;
+            min-width: 0;
         }
-        .section-title {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            font-family: 'Roboto', Arial, sans-serif;
-        }
-        .chip-checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 0.5rem;
-        }
-        .chip-item input[type="checkbox"] {
-            display: none;
-        }
-        .chip-checkbox-group label {
-            display: inline-flex;
-            align-items: center;
-            height: 24px;
-            padding: 0 10px;
-            font-size: 12px;
-            font-weight: 500;
-            font-family: 'Roboto', sans-serif;
-            border-radius: 7px;
-            border: 0.5px solid #a7aca7;
-            color: #49454F;
-            background-color: #FFFFFF;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-            user-select: none;
-        }
-        .chip-checkbox-group label:hover {
-            background-color: #F7F2FA;
-        }
-        .chip-item input[type="checkbox"]:checked ~ label {
-            background-color: #bccfa1;
-            color: #1a2516;
-            border-color: transparent;
-        }
-        .boton {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #46630a;
-            color: white;
-            border: none;
-            border-radius: 999px;
-            height: 34px;
-            width: 60px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-left: 18px;
-            margin-bottom: 0.5rem;
-        }
-        .boton:hover {
-            background: #344a07;
-        }
-        .boton svg {
-            width: 20px;
-            height: 20px;
-        }
-        @media (max-width: 700px) {
-            .floating-filters-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 8px;
-            }
-            .section-block {
-                min-width: 0;
-            }
-        }
-    </style>
-</head>
+    }
+</style>
 <body>
 <div class="floating-filters">
-    <form method="post" action="/test/procesar" class="floating-filters-row">
+    <form method="post" th:object="${filtros}" action="/test/procesar" class="floating-filters-row">
+        <!-- Actividades -->
         <div class="section-block">
             <span class="section-title">Actividades</span>
             <div class="chip-checkbox-group">
                 <div class="chip-item">
-                    <input type="checkbox" id="caminata" name="caminata">
+                    <input type="checkbox" id="caminata" th:field="*{caminata}">
                     <label for="caminata">Caminata</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="senderismo" name="senderismo">
+                    <input type="checkbox" id="senderismo" th:field="*{senderismo}">
                     <label for="senderismo">Senderismo</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="escalar" name="escalar">
+                    <input type="checkbox" id="escalar" th:field="*{escalar}">
                     <label for="escalar">Escalar</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="aventura" name="aventura">
+                    <input type="checkbox" id="aventura" th:field="*{aventura}">
                     <label for="aventura">Aventura</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="cultural" name="cultural">
+                    <input type="checkbox" id="cultural" th:field="*{cultural}">
                     <label for="cultural">T. Cultural</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="surfear" name="surfear">
+                    <input type="checkbox" id="surfear" th:field="*{surfear}">
                     <label for="surfear">Surfear</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="cata" name="cata">
+                    <input type="checkbox" id="cata" th:field="*{cataVinos}">
                     <label for="cata">Cata de vinos</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="recreativo" name="recreativo">
+                    <input type="checkbox" id="recreativo" th:field="*{recreativo}">
                     <label for="recreativo">T. Recreativo</label>
                 </div>
             </div>
         </div>
+        <!-- Clima -->
         <div class="section-block">
             <span class="section-title">Clima</span>
             <div class="chip-checkbox-group">
                 <div class="chip-item">
-                    <input type="checkbox" id="soleado" name="soleado">
+                    <input type="checkbox" id="soleado" th:field="*{soleado}">
                     <label for="soleado">Soleado</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="nublado" name="nublado">
+                    <input type="checkbox" id="nublado" th:field="*{nublado}">
                     <label for="nublado">Nublado</label>
                 </div>
                 <div class="chip-item">
-                    <input type="checkbox" id="lluviaLigera" name="lluviaLigera">
+                    <input type="checkbox" id="lluviaLigera" th:field="*{lluviaLigera}">
                     <label for="lluviaLigera">Lluvia ligera</label>
                 </div>
             </div>
         </div>
-        <button type="submit" class="boton">
-            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                <path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/>
-            </svg>
-        </button>
+        <!-- Botón -->
+        <div class="section-block boton-block">
+            <button type="submit" class="boton">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
+                    <path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/>
+                </svg>
+            </button>
+        </div>
     </form>
 </div>
 </body>

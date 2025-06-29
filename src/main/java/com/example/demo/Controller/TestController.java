@@ -40,6 +40,8 @@ public class TestController {
             log.debug("vamo de senderismo");
         if (filtros.isSoleado())
             log.debug("solecito");
+        if (filtros.isCataVinos())
+            log.debug("toca vinito");
 
          return "h";
     }
