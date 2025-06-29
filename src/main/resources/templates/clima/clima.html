@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<div th:replace="~{compartidos/head :: head()}"></div>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #FAFAFA;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 48px auto;
+        padding: 0 32px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: 36px;
+        font-weight: 700;
+    }
+
+    .day-section {
+        margin-bottom: 48px;
+    }
+
+    .day-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .day-header h2 {
+        font-size: 1.5em;
+        font-weight: 700;
+        margin: 0 0 22px 0;
+    }
+
+    .day-date {
+        font-size: 1.2em;
+        color: #949e8e;
+        font-weight: 400;
+        margin-bottom: 16px;
+    }
+
+    .stations-row {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+
+    .station-card {
+        background: #fff;
+        border-radius: 28px;
+        flex: 1 1 320px;
+        min-width: 320px;
+        max-width: 370px;
+        padding: 28px 18px 26px 18px;
+        margin-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 2px 10px 0 rgba(0,0,0,0.02);
+    }
+
+    .station-title {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .station-hours {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .hour-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hour-bar {
+        /*width: 44px;*/
+        height: 64px;
+        /*background: #ddd;*/
+        border-radius: 6px;
+        margin-bottom: 6px;
+        border-right: 1.5px solid #e0e0e0;
+    }
+
+    .hour-block:last-child .hour-bar {
+        border-right: none;
+    }
+
+    .hour-block span {
+        font-size: 1em;
+        color: #888;
+        margin-top: 2px;
+    }
+
+    .horizontal-scroll {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 40px;
+        padding-bottom: 16px;
+        scrollbar-width: thin;
+        scrollbar-color: #c0c0c0 #f5f5f5;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+        height: 10px;
+        background: #f5f5f5;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar-thumb {
+        background: #cccccc;
+        border-radius: 8px;
+    }
+
+    .station-card {
+        flex: 0 0 320px;
+        min-width: 320px;
+        max-width: 370px;
+    }
+
+    @media (max-width: 1000px) {
+        .stations-row {
+            flex-direction: column;
+            gap: 24px;
+        }
+        .station-card {
+            max-width: 100%;
+            min-width: 0;
+        }
+    }
+</style>
+<body>
+<div class="container">
+    <h1>Pronóstico del Clima</h1>
+    <div th:each="dia : ${ clima.semana }">
+        <section class="day-section">
+            <div class="day-header">
+                <h2 th:text="${ dia.dia}"></h2>
+                <span th:text="${ dia.fecha }" class="day-date"></span>
+            </div>
+            <div class="stations-row horizontal-scroll">
+                <div th:each="estacion : ${ dia.estaciones }">
+                    <div class="station-card">
+                        <div th:text="${ estacion.estacion }" class="station-title"></div>
+                        <div class="station-hours">
+                            <div th:each="horaDia : ${estacion.horario}">
+                                <div class="hour-block">
+                                    <img th:src="@{${horaDia.url}}" alt="climaicono" class="hour-bar">
+                                    <span th:text="${ horaDia.hora }"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>
