@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,16 @@ public class EstacionesController {
     private final IEstacionService estacionService;
 
     @GetMapping("")
-    public List<EstacionDto> getEstaciones(){
+    public ModelAndView getEstaciones(){
+        ModelAndView mav = new ModelAndView("estaciones/estaciones");
         try {
             Filtros filtros = new Filtros();
-
-            return estacionService.getInfoEstaciones();
+            mav.addObject("filtros", filtros);
+            mav.addObject("estaciones", estacionService.getInfoEstaciones());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return mav;
     }
 
 }
