@@ -13,7 +13,7 @@ public interface ReporteClimaRepository extends JpaRepository<ReporteClima, Seri
 
     @Query(value = "select r.RepClimaEstacion as estacion, r.RepClimaTemp as temperatura, r.RepClimaProbabilidadLluvia as probabilidad, r.RepClimaIntensidadLluvia as intensidad\n" +
             "from reporteclima r \n" +
-            "where r.RepClimaHora = :hora and DATE(r.RepClimaFecha) = '2025-07-02' and r.RepClimaEstacion = :estacion\n" +
+            "where r.RepClimaHora = :hora and DATE(r.RepClimaFecha) = CURRENT_DATE() and r.RepClimaEstacion = :estacion\n" +
             ";", nativeQuery = true)
     public AyudaClima getClimaPorEstacionHora(int estacion, int hora);
 
