@@ -25,7 +25,7 @@ public class UsuarioController {
 
 	@GetMapping("/lista")
 	public ModelAndView listar(@RequestParam(required = false) String nombreBuscar) {
-		ModelAndView mv = new ModelAndView("ListaUsuario"); // Nombre del HTML
+		ModelAndView mv = new ModelAndView("usuarios/ListaUsuario"); // Nombre del HTML
 		mv.addObject("listaU", usuarioservice.listarUsuario(nombreBuscar)); // Enviar lista al HTML
 		return mv;
 	}
@@ -34,14 +34,14 @@ public class UsuarioController {
 	public String ver(@PathVariable("id") int id, Model model) {
 		Usuario usuario = usuarioservice.obtenerUsuario(id);
 		model.addAttribute("usuario", usuario);
-		return "VerUsuario"; // Nombre del HTML
+		return "usuarios/VerUsuario"; // Nombre del HTML
 	}
 
 	@GetMapping("/gcrear")
 	public String crear(Model model) {
 		Usuario usuario = new Usuario();
 		model.addAttribute("usuario", usuario);
-		return "CrearUsuario"; // Nombre del HTML
+		return "usuarios/CrearUsuario"; // Nombre del HTML
 	}
 
 	@PostMapping("/pcrear")
@@ -56,7 +56,7 @@ public class UsuarioController {
 			return "redirect:/usuario/lista";
 		} catch (Exception e) {
 			System.out.println("Error al crear usuario: " + e.getMessage());
-			return "CrearUsuario";
+			return "usuarios/CrearUsuario";
 		}
 	}
 	@GetMapping("/geditar/{id}")
@@ -66,7 +66,7 @@ public class UsuarioController {
 			return "redirect:/usuario/lista";
 		}
 		model.addAttribute("usuario", usuario);
-		return "EditarUsuario";
+		return "usuarios/EditarUsuario";
 	}
 
 
