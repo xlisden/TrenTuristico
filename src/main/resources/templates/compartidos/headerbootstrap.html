@@ -1,0 +1,45 @@
+<div th:fragment="headerbootstrap()">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top py-2" style="backdrop-filter: blur(8px);">
+        <div class="container-fluid justify-content-center">
+            <ul class="navbar-nav gap-3">
+                <li class="nav-item">
+                    <a class="nav-link fw-medium px-4 rounded-pill" th:classappend="${activeSection == 'estaciones' ? 'active text-white bg-primary' : ''}" href="/estaciones">Estaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium px-4 rounded-pill" th:classappend="${activeSection == 'clima' ? 'active text-white bg-primary' : ''}" href="/clima">Clima</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium px-4 rounded-pill" th:classappend="${activeSection == 'usuario' ? 'active text-white bg-primary' : ''}" href="/usuario">Usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-medium px-4 rounded-pill" th:classappend="${activeSection == 'zonas' ? 'active text-white bg-primary' : ''}" href="/zonas">Zonas Turísticas</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <style>
+        body {
+            padding-top: 58px;
+        }
+        @media (max-width: 900px) {
+            body { padding-top: 54px; }
+            .navbar-nav { gap: 1rem !important; }
+            .nav-link { padding-left: 1rem !important; padding-right: 1rem !important; font-size: 1rem !important; }
+        }
+        .nav-link.active, .nav-link:hover {
+            background: var(--md-sys-color-primary, #345700FF) !important;
+            color: #fff !important;
+            border-radius: 18px !important;
+            transition: background .18s, color .18s;
+        }
+        .nav-link {
+            color: var(--md-sys-color-on-background, #222) !important;
+            font-size: 1.09rem !important;
+            border-radius: 18px !important;
+            transition: background .18s, color .18s;
+        }
+        .navbar {
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+        }
+    </style>
+</div>
