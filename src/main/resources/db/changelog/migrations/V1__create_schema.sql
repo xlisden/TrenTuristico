@@ -65,3 +65,13 @@ CREATE TABLE ReporteClima
     PRIMARY KEY (RepClimaId),
     FOREIGN KEY (RepClimaEstacion) REFERENCES Estacion(EstId)
 );
+
+CREATE TABLE HorarioTren
+(
+    HorTrenId INT NOT NULL AUTO_INCREMENT,
+    HorTrenHora VARCHAR(10) NOT NULL,
+    HorTrenUbi INT NOT NULL,
+    HorTrenEstado INT NOT NULL,
+    HorTrenDireccion INT NOT NULL,
+    PRIMARY KEY (HorTrenId)
+);

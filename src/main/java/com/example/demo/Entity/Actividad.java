@@ -16,7 +16,7 @@ public class Actividad {
 	private int ActId;
 	
 	@Column(name = "ActNom", length = 30)
-	private String ActNom;
+	private String actNom;
 
 	public Actividad() {
 		super();
@@ -25,7 +25,7 @@ public class Actividad {
 	public Actividad(int actId, String actNom) {
 		super();
 		ActId = actId;
-		ActNom = actNom;
+		this.actNom = actNom;
 	}
 
 	public int getActId() {
@@ -37,11 +37,11 @@ public class Actividad {
 	}
 
 	public String getActNom() {
-		return ActNom;
+		return actNom;
 	}
 
 	public void setActNom(String actNom) {
-		ActNom = actNom;
+		this.actNom = actNom;
 	}
 
 }
