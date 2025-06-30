@@ -18,6 +18,7 @@ public class EstacionesController {
 
     private final IEstacionService estacionService;
 
+    // odio github
     @GetMapping("")
     public List<EstacionDto> getEstaciones(){
         try {
