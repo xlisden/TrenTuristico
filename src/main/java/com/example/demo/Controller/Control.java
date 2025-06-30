@@ -46,6 +46,14 @@ public class Control {
 		a();
 		return mav;
 	}
+	@GetMapping({"/g"})
+	public ModelAndView a3() {
+		ModelAndView mav = new ModelAndView("h2");
+
+		mav.addObject("esta",estacionService.getInfoEstaciones());
+
+		return mav;
+	}
 
 
 	public void a(){

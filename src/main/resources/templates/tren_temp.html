@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout con Botones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+
+
+        .chip-checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip-checkbox-group button {
+            display: inline-flex;
+            align-items: center;
+            height: 32px;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            border-radius: 8px;
+            border: 0.5px solid #a7aca7;
+            color: #49454F;
+            background-color: #FFFFFF;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            user-select: none;
+        }
+
+        .chip-checkbox-group button:hover {
+            background-color: #F7F2FA;
+        }
+
+        .chip-checkbox-group button.selected {
+            background-color: #bccfa1;
+            color: #1a2516;
+            border-color: transparent;
+        }
+
+        .chip-checkbox-group button.active {
+            background-color: #ff6b6b;
+            color: white;
+            border-color: #ff5252;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+            }
+        }
+
+
+
+        /* Botones principales (14 botones en fila) */
+        .main-buttons {
+            display: flex;
+            flex-direction: row;      /* Elementos en fila */
+            align-items: center;      /* Centrado vertical */
+            gap: 5px;
+            margin-bottom: 40px;
+        }
+
+
+        /* Área de contenido */
+        .content-area {
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .content-top {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-bottom {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        /* Estilos para el mensaje "hola" */
+        .hello-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .hello-message.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .station-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .station-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .station-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .weather-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #fbbf24;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .temperature {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .passenger-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .passenger-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .passenger-count {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .stations-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Mensaje "hola" que aparecerá cada minuto -->
+    <div id="helloMessage" class="hello-message">
+        ¡Hola! 👋
+    </div>
+
+    <div class="stations-grid">
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <!--<input type="text" th:text="${esta.get(0).getNombre()}" readonly><br>
+                --><span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 14 Botones principales en fila -->
+    <div class="main-buttons chip-checkbox-group" id="mainButtons">
+        <!-- Los botones se generarán dinámicamente con JavaScript-->
+
+        <a th:onclick="mainAction(1)"><img id="1" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(2)"><img id="2" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(3)"><img id="3" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(4)"><img id="4" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(5)"><img id="5" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(6)"><img id="6" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(7)"><img id="7" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(8)"><img id="8" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(9)"><img id="9" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(10)"><img id="10" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(11)"><img id="11" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(12)"><img id="12" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(13)"><img id="13" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+        <a th:onclick="mainAction(14)"><img id="14" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
+
+    </div>
+
+
+    <div class="stations-grid">
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+
+        <div class="station-card">
+            <div class="station-name">Los Postes</div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <span class="temperature">29°</span>
+            </div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <span class="passenger-count">2</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de contenido centrada -->
+    <div class="content-area" id="contentArea">
+        <div class="content-top" id="contentTop">
+            <div>Área superior - Aquí puedes colocar tu contenido</div>
+        </div>
+        <div class="content-bottom" id="contentBottom">
+            <div>Área inferior - Aquí puedes colocar tu contenido</div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // Datos del servidor convertidos a JSON
+    const estaciones = /*[[${esta}]]*/ [];
+    const horas = /*[[${horas}]]*/ [];
+    let ubi=0;
+    let ubia=0;
+
+    function parseTimeString(timeString) {
+        const today = new Date();
+
+        // Dividir el string por ':' y convertir a números
+        const timeParts = timeString.split(':').map(Number);
+
+        // Extraer horas, minutos y segundos (segundos por defecto = 0 si no se proporciona)
+        const hours = timeParts[0] || 0;
+        const minutes = timeParts[1] || 0;
+        const seconds = timeParts[2] || 0;
+
+        // Crear objeto Date con la fecha actual pero con la hora especificada
+        const timeDate = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            hours,
+            minutes,
+            seconds,
+            0  // milisegundos = 0
+        );
+
+        return timeDate;
+    }
+
+
+    // Función para parsear string de tiempo incluyendo segundos
+    function parseTimeString(timeStr) {
+        const [hours, minutes, seconds = 0] = timeStr.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes, seconds, 0);
+        return date;
+    }
+
+    // Función para comparar si un tiempo es anterior (incluyendo segundos)
+    function isTimeBefore(time1, time2) {
+        return time1.getTime() <= time2.getTime();
+    }
+
+    // Función para comparar si un tiempo es posterior (incluyendo segundos)
+    function isTimeAfter(time1, time2) {
+        return time1.getTime() >= time2.getTime();
+    }
+
+    // Función para obtener la hora actual con precisión de segundos
+    function getCurrentTime() {
+        return new Date();
+    }
+
+    // Función para mostrar el mensaje
+    function mostrarMensaje() {
+        const helloMessage = document.getElementById('helloMessage');
+        let mensaje = 'No hay tren'; // Mensaje por defecto
+        let backgroundColor = '#4CAF50'; // Color verde por defecto
+
+        // Verificar si la hora actual está en algún rango de horas
+        for (let i = 1; i < horas.length; i++) {
+            try {
+                // Convertir las horas string a objetos Date para comparación (con segundos)
+                const t1 = parseTimeString(horas[i].hora);
+                const t2 = getCurrentTime(); // Hora actual con segundos
+                const tAnterior = parseTimeString(horas[i-1].hora);
+
+                // Comparar si la hora anterior es menor o igual que la actual
+                // Y la hora siguiente es mayor o igual que la actual
+                if (isTimeBefore(tAnterior, t2) && isTimeAfter(t1, t2)) {
+                    console.log('Rango encontrado:', horas[i-1]);
+                    console.log('Tiempo actual:', t2.toLocaleTimeString());
+                    console.log('Tiempo anterior:', tAnterior.toLocaleTimeString());
+                    console.log('Tiempo siguiente:', t1.toLocaleTimeString());
+
+                    mensaje = 'Estación: ' + horas[i-1].estacionUbi;
+                    ubi = horas[i-1].estacionUbi;
+                    let direc = horas[i-1].direccion;
+                    let estad = horas[i-1].estado;
+                    backgroundColor = '#2196F3'; // Azul para ubicación
+
+                    // Restaurar imagen anterior si existe
+                    if(ubia !== 0) {
+                        document.getElementById(ubia.toString()).src = "/icons/iconos/circulo.svg";
+                        document.getElementById(ubia.toString()).style.width = "50px";
+                        document.getElementById(ubia.toString()).style.height = "50px";
+                        document.getElementById(ubia.toString()).style.transform = "none"; // Resetear transformación
+                    }
+
+                    // Establecer nueva imagen según estado
+                    if(estad === 1) {
+                        document.getElementById(ubi.toString()).src = "/icons/iconos/trensito2.svg";
+                    } else {
+                        document.getElementById(ubi.toString()).src = "/icons/iconos/trensito.svg";
+                    }
+
+                    // Aplicar dirección (voltear imagen si es necesario)
+                    if(direc === 2) {
+                        document.getElementById(ubi.toString()).style.transform = "scaleX(-1)";
+                    } else {
+                        document.getElementById(ubi.toString()).style.transform = "none";
+                    }
+
+                    document.getElementById(ubi.toString()).style.width = "100px";
+                    document.getElementById(ubi.toString()).style.height = "100px";
+                    ubia = ubi;
+
+                    break; // Salir del bucle una vez encontrado
+                }
+            } catch (error) {
+                console.error('Error en comparación de tiempo:', error);
+                mensaje = 'no estacion';
+            }
+        }
+
+
+        // Aplicar el mensaje y color
+        helloMessage.textContent = mensaje;
+        helloMessage.style.backgroundColor = backgroundColor;
+
+        // Mostrar el mensaje
+        helloMessage.classList.add('show');
+
+        // Ocultar el mensaje después de 4 segundos
+        setTimeout(() => {
+            helloMessage.classList.remove('show');
+        }, 4000);
+
+
+    }
+
+    function mainAction(number) {
+        const contentTop = document.getElementById('contentTop');
+        const contentBottom = document.getElementById('contentBottom');
+
+        // Obtener la estación (ajustar índice porque los arrays empiezan en 0)
+        const estacion = estaciones[number - 1];
+
+        if (estacion) {
+            contentTop.innerHTML = `
+                    <div>
+                        <h3>Estación ${number}</h3>
+                        <label>Nombre:</label><br>
+                        <input type="text" value="${estacion.nombre}" readonly><br>
+                    </div>`;
+
+            contentBottom.innerHTML = `
+                    <div>
+                        <label>Temperatura:</label><br>
+                        <input type="text" value="${estacion.temperatura}°C" readonly><br>
+                        <label>Zonas Turísticas:</label><br>
+                        <input type="text" value="${estacion.nroZonasTuristicas}" readonly><br>
+                    </div>`;
+        } else {
+            contentTop.innerHTML = `<div>No hay datos para la estación ${number}</div>`;
+            contentBottom.innerHTML = `<div>Selecciona una estación válida</div>`;
+        }
+    }
+
+    // Generar botones al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM cargado, iniciando aplicación...');
+
+        //generateButtons();
+
+        // NUEVO: Mostrar mensaje cada 1 minuto (60000 ms)
+        setInterval(mostrarMensaje, 5000);
+
+        // Mostrar el primer mensaje después de 5 segundos de cargar la página
+        setTimeout(mostrarMensaje, 1000);
+    });
+</script>
+</body>
+</html>
