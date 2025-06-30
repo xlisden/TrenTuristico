@@ -28,6 +28,9 @@ public class ActividadSeriveImpl implements ActividadService{
 	}
 
 	@Override
+	public Actividad updateActi(Actividad actividad) {return actirepo.save(actividad);}
+
+	@Override
 	public Actividad getActi(int id) throws Exception {
 		return actirepo.findById(id).orElseThrow(() -> new Exception("La actividad no existe."));
 	}

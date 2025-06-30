@@ -51,5 +51,4 @@ public class ZonaTuristica {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ZonaCreadoPor", nullable = false)
     private Usuario creadoPor;
-
 }

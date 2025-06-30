@@ -6,28 +6,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clima")
 @RequiredArgsConstructor
 public class ReporteClimaController {
 
-    private final IReporteClimaService climaService;
+    private final IReporteClimaService reporteClimaService;
 
     @GetMapping("")
-    public ModelAndView getReporteClima(){
-        ModelAndView mav = new ModelAndView("clima/clima");
-        PronosticoClimaDto pronosticoClimaDto = new PronosticoClimaDto();
-
+    public PronosticoClimaDto getReporteClima(){
         try {
-            pronosticoClimaDto = climaService.getPronosticoClima();
-            mav.addObject("clima", pronosticoClimaDto);
+            return reporteClimaService.getPronosticoClima();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return mav;
+        return null;
     }
 
 }
