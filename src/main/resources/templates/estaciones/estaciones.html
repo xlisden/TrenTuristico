@@ -2,6 +2,8 @@
 <html lang="es">
 <div th:replace="~{compartidos/head :: head()}"></div>
 <style>
+
+    /*filtros*/
     .floating-filters {
         position: fixed;
         left: 0;
@@ -14,7 +16,6 @@
         display: flex;
         justify-content: center;
     }
-
     .floating-filters-row {
         display: flex;
         flex-direction: row;
@@ -24,38 +25,32 @@
         justify-content: center;
         align-items: flex-end;
     }
-
     .section-block {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         min-width: 180px;
     }
-
     .boton-block {
         align-items: center !important;
         justify-content: flex-end !important;
         min-width: 90px;
     }
-
     .section-title {
         font-size: 1rem;
         font-weight: 500;
         margin-bottom: 0.5rem;
         font-family: 'Roboto', Arial, sans-serif;
     }
-
     .chip-checkbox-group {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 0.5rem;
     }
-
     .chip-item input[type="checkbox"] {
         display: none;
     }
-
     .chip-checkbox-group label {
         display: inline-flex;
         align-items: center;
@@ -80,7 +75,6 @@
         color: #1a2516;
         border-color: transparent;
     }
-
     .boton {
         display: flex;
         align-items: center;
@@ -113,8 +107,129 @@
             min-width: 0;
         }
     }
+
+    /*zonas turisticas*/
+    .zona-turistica-card {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        border-radius: 24px;
+        overflow: hidden;
+        background: var(--md-sys-color-surface, #FAFAFA);
+        box-shadow: 0 2px 8px 0 rgb(60 60 60 / 0.05);
+        font-family: 'Roboto', sans-serif;
+        margin: 2rem auto;
+    }
+    .zona-turistica-card__img {
+        width: 100%;
+        height: 150px;
+        background: #DBDBDB;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .zona-turistica-card__content {
+        padding: 2rem 2.5rem 2rem 2.5rem;
+        background: var(--md-sys-color-surface, #FFF);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .zona-turistica-card__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .zona-turistica-card__title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 .75rem 0;
+        color: var(--md-sys-color-on-surface, #191D15);
+    }
+    .zona-turistica-card__chip {
+        display: inline-block;
+        font-size: 1rem;
+        background: #E1E1E1;
+        color: #555;
+        border-radius: 1em;
+        padding: .25em 1em;
+        margin-top: 0.25em;
+        font-weight: 500;
+    }
+    .zona-turistica-card__info-derecha {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.15em;
+    }
+    .zona-turistica-card__icono-clima {
+        width: 40px;
+        height: 40px;
+        background: #E1E1E1;
+        border-radius: 8px;
+        margin-bottom: 2px;
+    }
+    .zona-turistica-card__temp {
+        font-size: 1.1rem;
+        color: #777;
+        font-weight: 500;
+    }
+    .zona-turistica-card__datos {
+        display: flex;
+        gap: 3rem;
+    }
+    .zona-turistica-card__dato {
+        display: flex;
+        align-items: center;
+        gap: .7em;
+        color: var(--md-sys-color-on-surface-variant, #737373);
+        font-size: 1.13rem;
+        font-weight: 500;
+    }
+    .zona-turistica-card__icono {
+        display: inline-block;
+        vertical-align: middle;
+        width: 28px;
+        height: 28px;
+    }
+    .zona-turistica-card__icono.reloj {
+        background: url('data:image/svg+xml;utf8,<svg fill="rgb(115,121,104)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="rgb(115,121,104)" stroke-width="2"/><path d="M12 8v4l3 3" stroke="rgb(115,121,104)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>') center/contain no-repeat;
+    }
+    .zona-turistica-card__icono.caminar {
+        background: url('data:image/svg+xml;utf8,<svg fill="rgb(115,121,104)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M8 24l3-10 3 4v6"/><path d="M10 14l-2-2c-2-2-2-4 1-6s6-1 6 2c0 2-1 3-3 4l-2 1z" fill="none" stroke="rgb(115,121,104)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>') center/contain no-repeat;
+    }
+
 </style>
 <body>
+
+<!--zonas turisticas-->
+
+<div class="md-surface zona-turistica-card">
+    <div class="zona-turistica-card__img"></div>
+    <div class="zona-turistica-card__content">
+        <div class="zona-turistica-card__header">
+            <div>
+                <h2 class="zona-turistica-card__title">La Granja Villa</h2>
+                <span class="zona-turistica-card__chip">Campo Abierto</span>
+            </div>
+            <div class="zona-turistica-card__info-derecha">
+                <div class="zona-turistica-card__icono-clima"></div>
+                <span class="zona-turistica-card__temp">29°</span>
+            </div>
+        </div>
+        <div class="zona-turistica-card__datos">
+            <div class="zona-turistica-card__dato">
+                <span class="zona-turistica-card__icono reloj"></span>
+                <span>60min de recorrido</span>
+            </div>
+            <div class="zona-turistica-card__dato">
+                <span class="zona-turistica-card__icono caminar"></span>
+                <span>20min desde la estación</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--filtros-->
+
 <div class="floating-filters">
     <form method="post" th:object="${filtros}" action="/test/procesar" class="floating-filters-row">
         <!-- Actividades -->
