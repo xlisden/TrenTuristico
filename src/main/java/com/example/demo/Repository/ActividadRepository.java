@@ -11,8 +11,8 @@ import com.example.demo.Entity.Actividad;
 @Repository("actirepository")
 public interface ActividadRepository  extends JpaRepository<Actividad, Serializable>{
 
-    @Query("SELECT a FROM Actividad a WHERE a.id = :id")
+    @Query("SELECT a FROM Actividad a WHERE a.ActId = :id")
     public Actividad obtenerActividad(@Param("id") int id);
 
-    List<Actividad> findByNombreContainingIgnoreCase(String nombre);
+    List<Actividad> findByActNomContainingIgnoreCase(String nombre);
 }

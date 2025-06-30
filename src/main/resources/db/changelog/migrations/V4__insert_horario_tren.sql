@@ -1,16 +1,6 @@
-CREATE TABLE HorarioTren
-(
-    HorTrenId INT NOT NULL AUTO_INCREMENT,
-    HorTrenHora VARCHAR(10) NOT NULL,
-    HorTrenUbi INT NOT NULL,
-    HorTrenEstado INT NOT NULL,
-    HorTrenEstado INT NOT NULL,
-    PRIMARY KEY (HorTrenId)
-);
+--liquibase formatted sql
 
-
-
-
+--changeset felipe:2
 INSERT INTO horariotren (HorTrenId, HorTrenHora, HorTrenUbi, HorTrenEstado, HorTrenDireccion) VALUES (1, '06:00', 1, 2, 1)
                                                                                                    ,(2, '06:05', 2, 1, 1)
                                                                                                    ,(3, '06:10', 3, 1, 1)
