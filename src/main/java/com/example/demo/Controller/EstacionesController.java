@@ -13,6 +13,7 @@ public class EstacionesController {
 
     private final IEstacionService estacionService;
 
+    // odio github
     @GetMapping("")
     public ModelAndView getEstaciones(){
         ModelAndView mav = new ModelAndView("estaciones/estaciones");
