@@ -1,0 +1,79 @@
+<div th:fragment="header()" class="minimal-navbar">
+    <nav class="minimal-navbar">
+        <ul>
+            <li><a href="/estaciones">Estaciones</a></li>
+            <li><a href="/clima">Clima</a></li>
+            <li><a href="/usuario">Usuarios</a></li>
+            <li><a href="/zonas">Zonas Turísticas</a></li>
+        </ul>
+    </nav>
+    <style>
+        .minimal-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            background: #FAFAFA;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
+            backdrop-filter: blur(8px);
+        }
+        .minimal-navbar ul {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .minimal-navbar li {
+            position: relative;
+            border-radius: 18px;
+        }
+        .minimal-navbar a {
+            display: block;
+            padding: 8px 22px;
+            text-decoration: none;
+            color: var(--md-sys-color-on-background, #222);
+            font-family: inherit;
+            font-weight: 500;
+            font-size: 1.09rem;
+            border-radius: 18px;
+            transition: background .18s, color .18s;
+        }
+        .minimal-navbar li.active a,
+        .minimal-navbar a:hover {
+            background: var(--md-sys-color-primary, #345700FF);
+            color: #fff;
+            border-radius: 18px;
+        }
+        body {
+            padding-top: 58px;
+        }
+        @media (max-width: 900px) {
+            .minimal-navbar ul {
+                gap: 18px;
+            }
+            .minimal-navbar a {
+                padding: 8px 10px;
+                font-size: 1rem;
+            }
+            body {
+                padding-top: 54px;
+            }
+        }
+    </style>
+</div>
+
+<!--<ul>-->
+<!--    <li th:classappend="${activeSection == 'rel' ? 'active' : ''}"><a href="#">Relationship</a></li>-->
+<!--    <li th:classappend="${activeSection == 'opp' ? 'active' : ''}"><a href="#">Opportunities</a></li>-->
+<!--    <li th:classappend="${activeSection == 'leads' ? 'active' : ''}"><a href="#">Leads</a></li>-->
+<!--    <li th:classappend="${activeSection == 'cal' ? 'active' : ''}"><a href="#">Calendar</a></li>-->
+<!--    <li th:classappend="${activeSection == 'cases' ? 'active' : ''}"><a href="#">Cases</a></li>-->
+<!--    <li th:classappend="${activeSection == 'reports' ? 'active' : ''}"><a href="#">Reports</a></li>-->
+<!--    <li th:classappend="${activeSection == 'quotes' ? 'active' : ''}"><a href="#">Quotes</a></li>-->
+<!--</ul>-->

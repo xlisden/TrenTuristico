@@ -8,17 +8,19 @@ import java.time.LocalDateTime;
 public class UtilsServcice {
 
     public int getHora() {
-        int horaInicial = LocalDateTime.now().getHour();
-        if (horaInicial < 10)
+        int hora = LocalDateTime.now().getHour();
+
+        if (hora < 10)
             return 7;
-        else if (horaInicial >= 10 && horaInicial < 13)
+        else if (hora >= 10 && hora < 13)
             return 10;
-        else if (horaInicial >= 13 && horaInicial < 16)
+        else if (hora >= 13 && hora < 16)
             return 13;
-        else if (horaInicial >= 16 && horaInicial < 19)
+        else if (hora >= 16 && hora < 19)
             return 16;
-        else if (horaInicial >= 19)
+        else if (hora >= 19)
             return 19;
+
         return 0;
     }
 

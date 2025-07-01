@@ -32,8 +32,8 @@ INSERT INTO Actividad (ActNombre) VALUES
     ('Turismo recreativo'); /* 8 */
 
 INSERT INTO Usuario (UserDni, UserNombre, UserApPaterno, UserApMaterno, UserUsername, UserPassword, UserActivo) VALUES
-    ('71994256', 'Hamid Farid', 'Rivera', 'Gonzales', 'admin', '$2a$10$8cTkEYrA8s2QFKXglJpmeOLfWCM5blCX8qcpHxBT4Q9tReCKFkRQK', 1),
-    ('73234232', 'Dayenira', 'Delgado', 'Esteban', 'developer', '$2a$10$ulFnYK4tm80usL.PTjVyoeIs2PJAz8sFWWS7cjpKOk3alSkZi.JnS', 1);
+    ('71994256', 'Hamid Farid', 'Rivera', 'Gonzales', 'rivera_hamid', '$2a$10$8cTkEYrA8s2QFKXglJpmeOLfWCM5blCX8qcpHxBT4Q9tReCKFkRQK', 1),
+    ('73234232', 'Dayenira', 'Delgado', 'Esteban', 'delgado_dayenira', '$2a$10$ulFnYK4tm80usL.PTjVyoeIs2PJAz8sFWWS7cjpKOk3alSkZi.JnS', 1);
 
 INSERT INTO ZonaTuristica (ZonaNombre, ZonaTiempoLlegada, ZonaTiempoRecorrido, ZonaActivo, ZonaEstacion, ZonaActividad, ZonaTipoLugar, ZonaCreadoPor) VALUES
     ('Club zonal Huiracocha', 10, 60, 1, 2, 8, 1,1),
