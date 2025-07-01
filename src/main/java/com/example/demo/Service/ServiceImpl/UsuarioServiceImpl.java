@@ -37,7 +37,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> listarUsuario(String nombre) {
-		return usurepository.findByNombreContainingIgnoreCase(nombre);
+		if(nombre==null)
+			return usurepository.findAll();
+		else
+			return usurepository.findByNombreContainingIgnoreCase(nombre);
 	}
 
 

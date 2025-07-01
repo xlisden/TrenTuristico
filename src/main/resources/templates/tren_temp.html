@@ -12,79 +12,106 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1300px;
             margin: 0 auto;
             padding: 30px;
         }
-
-
-
-        .chip-checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
+        /* Tarjeta de elección */
+        .eleccion-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            width: 500px;        /* Ancho fijo - MODIFICAR AQUÍ */
+            height: 300px;       /* Alto fijo - MODIFICAR AQUÍ */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: none; /* Inicialmente oculta */
+            animation: slideInRight 0.3s ease-out;
+            z-index: 100;
         }
 
-        .chip-checkbox-group button {
-            display: inline-flex;
+        /* Botón X para cerrar */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
             align-items: center;
-            height: 32px;
-            padding: 0 16px;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #dc2626;
+        }
+
+        /* Contenido de la tarjeta */
+        .card-content {
+            margin-top: 10px;
+        }
+
+        .card-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-button {
+            background-color: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
             font-size: 14px;
             font-weight: 500;
-            font-family: 'Roboto', sans-serif;
-            border-radius: 8px;
-            border: 0.5px solid #a7aca7;
-            color: #49454F;
-            background-color: #FFFFFF;
             cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-            user-select: none;
+            transition: background-color 0.2s ease;
         }
 
-        .chip-checkbox-group button:hover {
-            background-color: #F7F2FA;
+        .card-button:hover {
+            background-color: #16a34a;
         }
 
-        .chip-checkbox-group button.selected {
-            background-color: #bccfa1;
-            color: #1a2516;
-            border-color: transparent;
-        }
-
-        .chip-checkbox-group button.active {
-            background-color: #ff6b6b;
-            color: white;
-            border-color: #ff5252;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+        /* Animación de entrada desde la derecha */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
             }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
-
-
 
         /* Botones principales (14 botones en fila) */
         .main-buttons {
             display: flex;
             flex-direction: row;      /* Elementos en fila */
             align-items: center;      /* Centrado vertical */
-            gap: 5px;
+            justify-content: center;  /* Centrado horizontal */
+            gap: 25px;
             margin-bottom: 40px;
         }
 
 
         /* Área de contenido */
         .content-area {
+            max-width: 700px;
             text-align: center;
             min-height: 200px;
             display: flex;
@@ -92,6 +119,10 @@
             font-size: 18px;
             border: 1px solid #ccc;
             padding: 20px;
+            /*margin: 0 auto; /* Esto centra horizontalmente */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* borde más sutil */
+            border-radius: 12px;                 /* esquinas redondeadas */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* sombra ligera opcional */
         }
 
         .content-top {
@@ -104,13 +135,6 @@
             margin-bottom: 20px;
         }
 
-        .content-bottom {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 20px;
-        }
 
         /* Estilos para el mensaje "hola" */
         .hello-message {
@@ -140,6 +164,7 @@
             gap: 20px;
             margin: 40px 0;
         }
+
 
         .station-card {
             background: white;
@@ -180,11 +205,6 @@
             font-size: 12px;
         }
 
-        .temperature {
-            color: #6b7280;
-            font-size: 14px;
-        }
-
         .passenger-info {
             display: flex;
             align-items: center;
@@ -200,10 +220,33 @@
             align-items: center;
             justify-content: center;
         }
+        .station-card {
+            position: relative;
+            /* Asegura que el botón se posicione relativo a esta tarjeta */
+        }
 
-        .passenger-count {
-            color: #6b7280;
+        .station-card button {
+            background-color: #22c55e; /* Verde */
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .station-card button:hover {
+            background-color: #16a34a; /* Verde más oscuro al hacer hover */
+        }
+
+        .station-card button:active {
+            background-color: #15803d; /* Verde aún más oscuro al hacer clic */
+            transform: translateY(1px); /* Efecto de presión */
         }
 
         @media (max-width: 1024px) {
@@ -232,96 +275,108 @@
     <div id="helloMessage" class="hello-message">
         ¡Hola! 👋
     </div>
-
     <div class="stations-grid">
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+
+        <div class="station-card"   onclick="mainAction(1)" >
+            <div class="station-name"><label th:text="${esta.get(0).getNombre()}"></label></div>
             <div class="weather-info">
-                <!--<input type="text" th:text="${esta.get(0).getNombre()}" readonly><br>
-                --><span class="temperature">29°</span>
-            </div>
+                <div class="weather-icon">☀</div>
+                <label th:text="${esta.get(0).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(0).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(0)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(2)" >
+            <div class="station-name"><label th:text="${esta.get(1).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(1).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(1).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(1)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(3)" >
+            <div class="station-name"><label th:text="${esta.get(2).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(2).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(2).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(2)" > Elegir destino </button>
+            </div>
+        </div>
+        <div class="station-card"   onclick="mainAction(4)" >
+            <div class="station-name"><label th:text="${esta.get(3).getNombre()}"></label></div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <label th:text="${esta.get(3).getTemperatura()}"></label></div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <label th:text="${esta.get(3).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(3)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(5)" >
+            <div class="station-name"><label th:text="${esta.get(4).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(4).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(4).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(4)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(6)" >
+            <div class="station-name"><label th:text="${esta.get(5).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(5).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(5).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(5)" > Elegir destino </button>
             </div>
         </div>
-
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(7)" >
+            <div class="station-name"><label th:text="${esta.get(6).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(6).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
-            </div>
-        </div>
+                <label th:text="${esta.get(6).getNroZonasTuristicas()}"></label></div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
-            <div class="weather-info">
-                <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
-            <div class="passenger-info">
-                <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(6)" > Elegir destino </button>
             </div>
         </div>
     </div>
 
 
     <!-- 14 Botones principales en fila -->
-    <div class="main-buttons chip-checkbox-group" id="mainButtons">
+    <div class="main-buttons " id="mainButtons">
         <!-- Los botones se generarán dinámicamente con JavaScript-->
 
         <a th:onclick="mainAction(1)"><img id="1" th:src="@{/icons/iconos/circulo.svg}" width="50" height="50" alt="detalleIcon"></a>
@@ -343,87 +398,100 @@
 
 
     <div class="stations-grid">
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+
+        <div class="station-card"   onclick="mainAction(8)" >
+            <div class="station-name"><label th:text="${esta.get(7).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(7).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(7).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(7)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(9)" >
+            <div class="station-name"><label th:text="${esta.get(8).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(8).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(8).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(8)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(10)" >
+            <div class="station-name"><label th:text="${esta.get(9).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(9).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(9).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(9)" > Elegir destino </button>
+            </div>
+        </div>
+        <div class="station-card"   onclick="mainAction(11)" >
+            <div class="station-name"><label th:text="${esta.get(10).getNombre()}"></label></div>
+            <div class="weather-info">
+                <div class="weather-icon">☀</div>
+                <label th:text="${esta.get(10).getTemperatura()}"></label></div>
+            <div class="passenger-info">
+                <div class="passenger-icon">👤</div>
+                <label th:text="${esta.get(10).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(10)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(12)" >
+            <div class="station-name"><label th:text="${esta.get(11).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(11).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(11).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(11)" > Elegir destino </button>
             </div>
         </div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(13)" >
+            <div class="station-name"><label th:text="${esta.get(12).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(12).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+                <label th:text="${esta.get(12).getNroZonasTuristicas()}"></label></div>
+
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(12)" > Elegir destino </button>
             </div>
         </div>
-
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
+        <div class="station-card"   onclick="mainAction(14)" >
+            <div class="station-name"><label th:text="${esta.get(13).getNombre()}"></label></div>
             <div class="weather-info">
                 <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
+                <label th:text="${esta.get(13).getTemperatura()}"></label></div>
             <div class="passenger-info">
                 <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
-            </div>
-        </div>
+                <label th:text="${esta.get(13).getNroZonasTuristicas()}"></label></div>
 
-        <div class="station-card">
-            <div class="station-name">Los Postes</div>
-            <div class="weather-info">
-                <div class="weather-icon">☀</div>
-                <span class="temperature">29°</span>
-            </div>
-            <div class="passenger-info">
-                <div class="passenger-icon">👤</div>
-                <span class="passenger-count">2</span>
+            <div class="passenger-info"> <br><br>
+                <button onclick="eleccion(13)" > Elegir destino </button>
             </div>
         </div>
     </div>
@@ -431,45 +499,32 @@
     <!-- Área de contenido centrada -->
     <div class="content-area" id="contentArea">
         <div class="content-top" id="contentTop">
-            <div>Área superior - Aquí puedes colocar tu contenido</div>
+
         </div>
-        <div class="content-bottom" id="contentBottom">
-            <div>Área inferior - Aquí puedes colocar tu contenido</div>
+
+    </div>
+    <!-- Tarjeta de elección (inicialmente oculta) -->
+    <div id="eleccion-card" class="eleccion-card">
+        <button class="close-btn" onclick="cerrarEleccion()">×</button>
+        <div class="card-content">
+            <label id="card-label" class="card-label">  texto en el js ->>> </label>
+            <label class="card-label">" tarifa "</label>
+            <label  class="card-label">" tiempo de llegada del tren  "</label>
+            <label  class="card-label">" clima de la estacion "</label>
+            <label  class="card-label">" etc. no se más "</label>
         </div>
     </div>
+
+
 </div>
 
 <script th:inline="javascript">
     // Datos del servidor convertidos a JSON
     const estaciones = /*[[${esta}]]*/ [];
     const horas = /*[[${horas}]]*/ [];
+    const zonas = /*[[${zonas}]]*/ [];
     let ubi=0;
     let ubia=0;
-
-    function parseTimeString(timeString) {
-        const today = new Date();
-
-        // Dividir el string por ':' y convertir a números
-        const timeParts = timeString.split(':').map(Number);
-
-        // Extraer horas, minutos y segundos (segundos por defecto = 0 si no se proporciona)
-        const hours = timeParts[0] || 0;
-        const minutes = timeParts[1] || 0;
-        const seconds = timeParts[2] || 0;
-
-        // Crear objeto Date con la fecha actual pero con la hora especificada
-        const timeDate = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate(),
-            hours,
-            minutes,
-            seconds,
-            0  // milisegundos = 0
-        );
-
-        return timeDate;
-    }
 
 
     // Función para parsear string de tiempo incluyendo segundos
@@ -512,10 +567,6 @@
                 // Comparar si la hora anterior es menor o igual que la actual
                 // Y la hora siguiente es mayor o igual que la actual
                 if (isTimeBefore(tAnterior, t2) && isTimeAfter(t1, t2)) {
-                    console.log('Rango encontrado:', horas[i-1]);
-                    console.log('Tiempo actual:', t2.toLocaleTimeString());
-                    console.log('Tiempo anterior:', tAnterior.toLocaleTimeString());
-                    console.log('Tiempo siguiente:', t1.toLocaleTimeString());
 
                     mensaje = 'Estación: ' + horas[i-1].estacionUbi;
                     ubi = horas[i-1].estacionUbi;
@@ -552,7 +603,6 @@
                     break; // Salir del bucle una vez encontrado
                 }
             } catch (error) {
-                console.error('Error en comparación de tiempo:', error);
                 mensaje = 'no estacion';
             }
         }
@@ -573,39 +623,65 @@
 
     }
 
+    function eleccion(numero) {
+        const card = document.getElementById('eleccion-card');
+        const label = document.getElementById('card-label');
+
+        // Actualizar el contenido del label con el número recibido
+        label.textContent = `Estación Seleccionada : ${numero}`;// mandar estacion[numero].nombre o algo asi
+
+        // Mostrar la tarjeta
+        card.style.display = 'block';
+    }
+
+    // Función para cerrar la tarjeta (solo con X)
+    function cerrarEleccion() {
+        const card = document.getElementById('eleccion-card');
+        card.style.display = 'none';
+    }
+
+    // Función del botón dentro de la tarjeta
+    function accionBoton() {
+        const label = document.getElementById('card-label');
+        alert(`Confirmaste: ${label.textContent}`);
+    }
+
     function mainAction(number) {
         const contentTop = document.getElementById('contentTop');
         const contentBottom = document.getElementById('contentBottom');
 
         // Obtener la estación (ajustar índice porque los arrays empiezan en 0)
-        const estacion = estaciones[number - 1];
+        const estacio = estaciones[number - 1];
 
-        if (estacion) {
+        if (estacio) {
+            // Filtrar las zonas que pertenecen a esta estación
+            const zonasDeEstacion = zonas.filter(zona => zona.estacion === estacio.idEstacion);
+
+            // Crear el HTML para las zonas
+            let zonasHTML = '';
+            if (zonasDeEstacion.length > 0) {
+                zonasDeEstacion.forEach(zona => {
+                    zonasHTML += `<label>${zona.nombre}</label>`+` -  Duracion Recorrido aprox   `+`<label>${zona.dura}</label> min<br>`;
+                });
+            }else{
+                zonasHTML = 'No hay zonas turísticas';
+            }
+
             contentTop.innerHTML = `
-                    <div>
-                        <h3>Estación ${number}</h3>
-                        <label>Nombre:</label><br>
-                        <input type="text" value="${estacion.nombre}" readonly><br>
-                    </div>`;
-
-            contentBottom.innerHTML = `
-                    <div>
-                        <label>Temperatura:</label><br>
-                        <input type="text" value="${estacion.temperatura}°C" readonly><br>
-                        <label>Zonas Turísticas:</label><br>
-                        <input type="text" value="${estacion.nroZonasTuristicas}" readonly><br>
-                    </div>`;
-        } else {
+        <div>
+            <h3>Estación ${estacio.nombre}</h3><br><br><br>
+            <label>Temperatura:</label><br>
+            <label>${estacio.temperatura}°C</label><br><br>
+            <label>Zonas Turísticas:</label><br><br>
+            ${zonasHTML}
+        </div>`;
+        }else {
             contentTop.innerHTML = `<div>No hay datos para la estación ${number}</div>`;
-            contentBottom.innerHTML = `<div>Selecciona una estación válida</div>`;
         }
     }
 
     // Generar botones al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM cargado, iniciando aplicación...');
-
-        //generateButtons();
 
         // NUEVO: Mostrar mensaje cada 1 minuto (60000 ms)
         setInterval(mostrarMensaje, 5000);
