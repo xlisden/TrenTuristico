@@ -3,10 +3,12 @@ package com.example.demo.Repository;
 import com.example.demo.Entity.ZonaTuristica;
 import com.example.demo.Entity.extras.ZonaTuristicaQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
 
+@Repository
 public interface ZonaTuristicaRepository extends JpaRepository<ZonaTuristica, Serializable> {
 
     @Query(value = "select distinct z.ZonaEstacion as estacion, z.ZonaId as idZona, z.ZonaNombre as zona, z.ZonaTipoLugar as lugar, z.ZonaTiempoRecorrido as recorrido, z.ZonaTiempoLlegada as llegada,\n" +
