@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 @AllArgsConstructor
-public class ZonaImpl implements ZonaTuristicaService {
+public class ZonaImpl implements IZonaTuristicaService {
 
 
     private ZonaTuristicaRepository zonarepo;
