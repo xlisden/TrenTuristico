@@ -1,5 +1,6 @@
 package com.example.demo.Service.ServiceImpl;
 
+import com.example.demo.Entity.Estacion;
 import com.example.demo.Entity.extras.AyudaClima;
 import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Repository.EstacionRepository;
@@ -31,6 +32,11 @@ public class EstacionService implements IEstacionService {
         return estaciones;
     }
 
+    @Override
+    public List<Estacion> listar() {
+        return estacionRepository.findAll();  // ya con esto todo estará bien en el controlador
+    }
+    
     public String getUrl(int idEstacion, int hora) {
         AyudaClima clima = reporteClimaRepository.getClimaPorEstacionHora(idEstacion, hora);
         boolean esDeDia = hora < 16;

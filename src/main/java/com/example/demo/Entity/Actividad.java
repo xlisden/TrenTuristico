@@ -24,7 +24,7 @@ public class Actividad {
 
 	public Actividad(int actId, String actNom) {
 		super();
-		ActId = actId;
+		this.ActId = actId;
 		this.actNom = actNom;
 	}
 

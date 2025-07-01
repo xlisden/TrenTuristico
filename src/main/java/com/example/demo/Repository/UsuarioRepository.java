@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.io.Serializable;
+import java.util.Optional;
 
 @Repository("usurepository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Serializable> {
@@ -15,5 +16,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Serializable> 
     public Usuario obtenerUsuario(@Param("id") int id);
 
     List<Usuario> findByNombreContainingIgnoreCase(String nombre);
+    Optional<Usuario> findByUsername(String username);
 }
 
