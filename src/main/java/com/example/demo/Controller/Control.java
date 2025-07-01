@@ -4,7 +4,7 @@ import com.example.demo.Entity.HorarioTren;
 import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Service.HorTrenService;
 import com.example.demo.Service.IEstacionService;
-import com.example.demo.Service.ZonaTuristicaService;
+import com.example.demo.Service.IZonaTuristicaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class Control {
 
 	private final IEstacionService estacionService;
 	private	 final HorTrenService horTrenService;
-	private	 final ZonaTuristicaService sonaService;
+	private	 final IZonaTuristicaService sonaService;
 
 	@GetMapping({"/", ""})
     public ModelAndView a1() {
