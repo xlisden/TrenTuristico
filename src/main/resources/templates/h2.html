@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador INSERT Horario Tren</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            border: 2px solid #dee2e6;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input, button {
+            padding: 12px;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .output-container {
+            margin-top: 30px;
+        }
+
+        .output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-line;
+            border: 2px solid #4a5568;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .pattern-info {
+            background: linear-gradient(45deg, #ed8936, #dd6b20);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .pattern-info h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .scrollbar-thin {
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #e2e8f0;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🚂 Generador INSERT Horario Tren</h1>
+
+    <div class="pattern-info">
+        <h3>📋 Patrones Configurados:</h3>
+        <p><strong>Ubicación:</strong> 1→2→3→...→14→13→12→...→1 (oscilación continua)</p>
+        <p><strong>Dirección:</strong> 1 (subiendo 1→14), 2 (bajando 14→1)</p>
+        <p><strong>Estado:</strong> 2,1,1,2,1,1,2,1,1,2... (patrón repetitivo)</p>
+        <p><strong>Tiempo:</strong> Incremento cada 5 segundos desde 13:00:00</p>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="cantidad">Cantidad de registros:</label>
+            <input type="number" id="cantidad" value="100" min="1" max="10000">
+        </div>
+
+        <div class="control-group">
+            <label for="startId">ID inicial:</label>
+            <input type="number" id="startId" value="1" min="1">
+        </div>
+
+        <div class="control-group">
+            <label for="horaInicial">Hora inicial:</label>
+            <input type="time" id="horaInicial" value="13:00">
+        </div>
+
+        <div class="control-group button-group">
+            <button onclick="generarInserts()">🚀 Generar INSERTs</button>
+            <button onclick="copiarTodo()">📋 Copiar Todo</button>
+            <button onclick="descargarArchivo()">💾 Descargar SQL</button>
+            <button onclick="limpiarOutput()">🗑️ Limpiar</button>
+        </div>
+    </div>
+
+    <div class="stats" id="stats" style="display: none;">
+        <div class="stat-card">
+            <span class="stat-value" id="totalRegistros">0</span>
+            <span class="stat-label">Registros</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="tiempoTotal">0</span>
+            <span class="stat-label">Minutos</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="ciclosCompletos">0</span>
+            <span class="stat-label">Ciclos 1→14→1</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="horaFinal">--:--</span>
+            <span class="stat-label">Hora Final</span>
+        </div>
+    </div>
+
+    <div class="output-container">
+        <div class="output scrollbar-thin" id="output" style="display: none;">
+            <!-- Los INSERTs se generarán aquí -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function generarInserts() {
+        const cantidad = parseInt(document.getElementById('cantidad').value);
+        const startId = parseInt(document.getElementById('startId').value);
+        const horaInicial = document.getElementById('horaInicial').value;
+
+        if (!cantidad || cantidad < 1) {
+            alert('Por favor ingresa una cantidad válida');
+            return;
+        }
+
+        const [horaIni, minutoIni] = horaInicial.split(':').map(Number);
+
+        let inserts = [];
+        let currentId = startId;
+        let  c=0;
+        let segundos = 0;
+        let ubicacion = 1;
+        let direccion = 1; // 1 = subiendo (1→14), 2 = bajando (14→1)
+        let estadoIndex = 0;
+        let subiendo = true;
+
+        // Patrón de estado: 2,1,1,2,1,1,2,1,1,2...
+        const patronEstado = [2, 1, 1];
+
+        for (let i = 0; i < cantidad; i++) {
+            // Calcular hora actual
+            const totalSegundos = (horaIni * 3600) + (minutoIni * 60) + segundos;
+            const horas = Math.floor(totalSegundos / 3600) % 24;
+            const minutos = Math.floor((totalSegundos % 3600) / 60);
+            const segs = totalSegundos % 60;
+
+            const horaStr = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segs.toString().padStart(2, '0')}`;
+
+            // Estado según patrón
+            const estado = patronEstado[estadoIndex % patronEstado.length];
+
+            // Generar INSERT
+            if(i===0){
+                const insert = `INSERT INTO horariotren (HorTrenId, HorTrenHora, HorTrenUbi, HorTrenEstado, HorTrenDireccion) VALUES (${currentId}, '${horaStr}', ${ubicacion}, ${estado}, ${direccion})`;
+                inserts.push(insert);
+            }else{
+                if(i<(cantidad-1)){
+                    const insert = `,(${currentId}, '${horaStr}', ${ubicacion}, ${estado}, ${direccion})`;
+                    inserts.push(insert);
+                }else{
+                    const insert =`,(${currentId}, '${horaStr}', ${ubicacion}, ${estado}, ${direccion});`;
+                    inserts.push(insert);
+                }
+            }
+
+
+
+
+            // Incrementar valores para siguiente iteración
+            currentId++;
+            segundos += 5;
+            estadoIndex++;
+
+            // Actualizar ubicación y dirección
+            if (subiendo) {
+                c++;
+                if(c===3){
+                    c=0;
+                    ubicacion++;
+                }
+
+                if (ubicacion > 14) {
+                    ubicacion = 13; // Empezar a bajar desde 13
+                    subiendo = false;
+                    direccion = 2; // Cambiar dirección a bajando
+                }
+            } else {
+                ubicacion--;
+                if (ubicacion < 1) {
+                    ubicacion = 2; // Empezar a subir desde 2
+                    subiendo = true;
+                    direccion = 1; // Cambiar dirección a subiendo
+                }
+            }
+        }
+
+        // Mostrar resultados
+        const output = document.getElementById('output');
+        output.innerHTML = inserts.join('\n');
+        output.style.display = 'block';
+
+        // Actualizar estadísticas
+        actualizarEstadisticas(cantidad, segundos, horaInicial);
+
+        // Scroll suave hacia el output
+        output.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function actualizarEstadisticas(cantidad, segundosTotales, horaInicial) {
+        const stats = document.getElementById('stats');
+        stats.style.display = 'grid';
+
+        document.getElementById('totalRegistros').textContent = cantidad;
+        document.getElementById('tiempoTotal').textContent = Math.round(segundosTotales / 60);
+
+        // Calcular ciclos completos (1→14→1 = 26 movimientos)
+        const ciclos = Math.floor(cantidad / 26);
+        document.getElementById('ciclosCompletos').textContent = ciclos;
+
+        // Calcular hora final
+        const [horaIni, minutoIni] = horaInicial.split(':').map(Number);
+        const totalSegundos = (horaIni * 3600) + (minutoIni * 60) + segundosTotales;
+        const horasFinal = Math.floor(totalSegundos / 3600) % 24;
+        const minutosFinal = Math.floor((totalSegundos % 3600) / 60);
+        const horaFinalStr = `${horasFinal.toString().padStart(2, '0')}:${minutosFinal.toString().padStart(2, '0')}`;
+        document.getElementById('horaFinal').textContent = horaFinalStr;
+    }
+
+    function copiarTodo() {
+        const output = document.getElementById('output');
+        if (output.style.display === 'none' || !output.textContent.trim()) {
+            alert('Primero genera los INSERTs');
+            return;
+        }
+
+        navigator.clipboard.writeText(output.textContent).then(() => {
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '✅ Copiado!';
+            button.style.background = 'linear-gradient(45deg, #48bb78, #38a169)';
+
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+            }, 2000);
+        }).catch(() => {
+            alert('Error al copiar. Selecciona el texto manualmente.');
+        });
+    }
+
+    function descargarArchivo() {
+        const output = document.getElementById('output');
+        if (output.style.display === 'none' || !output.textContent.trim()) {
+            alert('Primero genera los INSERTs');
+            return;
+        }
+
+        const contenido = output.textContent;
+        const blob = new Blob([contenido], { type: 'text/sql' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `horario_tren_inserts_${new Date().toISOString().split('T')[0]}.sql`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }
+
+    function limpiarOutput() {
+        document.getElementById('output').style.display = 'none';
+        document.getElementById('stats').style.display = 'none';
+    }
+
+    // Generar algunos registros de ejemplo al cargar
+    window.onload = function() {
+        document.getElementById('cantidad').value = 50;
+        generarInserts();
+    };
+</script>
+</body>
+</html>

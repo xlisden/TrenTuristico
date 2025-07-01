@@ -8,4 +8,5 @@
     <include file="/db/changelog/migrations/V1__create_schema.sql" />
     <include file="/db/changelog/migrations/V2__insert_data.sql" />
     <include file="/db/changelog/migrations/V3__insert_reporte_clima.sql" />
+    <include file="/db/changelog/migrations/V4__insert_horario_tren.sql" />
 </databaseChangeLog>
