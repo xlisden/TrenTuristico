@@ -1,15 +1,10 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Entity.extras.Filtros;
 import com.example.demo.Service.IEstacionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/estaciones")
@@ -18,16 +13,31 @@ public class EstacionesController {
 
     private final IEstacionService estacionService;
 
+    // odio github
     @GetMapping("")
-    public List<EstacionDto> getEstaciones(){
+    public ModelAndView getEstaciones(){
+        ModelAndView mav = new ModelAndView("estaciones/estaciones");
         try {
             Filtros filtros = new Filtros();
-
-            return estacionService.getInfoEstaciones();
+            filtros.setCataVinos(true);
+            mav.addObject("filtros", filtros);
+            mav.addObject("estaciones", estacionService.getInfoEstaciones());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return mav;
+    }
+
+    @PostMapping("/filtrar")
+    public ModelAndView filtrarEstaciones(@ModelAttribute Filtros filtros){
+        ModelAndView mav = new ModelAndView("estaciones/estaciones");
+        try {
+            mav.addObject("filtros", filtros);
+            mav.addObject("estaciones", estacionService.getInfoEstaciones());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mav;
     }
 
 }
