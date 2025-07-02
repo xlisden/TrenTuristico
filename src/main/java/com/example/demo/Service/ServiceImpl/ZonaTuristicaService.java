@@ -48,7 +48,7 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         List<ZonaTuristica> zonaTuristicas = zonaRepository.findAll();
         List<ZonaDto> list = new ArrayList<>();
         for (ZonaTuristica z : zonaTuristicas) {
-            list.add(new ZonaDto(z.getId(),z.getNombre(),z.getEstacion().getId(),z.getTiempoRecorrido()));
+            list.add(new ZonaDto(z.getId(), z.getNombre(), z.getEstacion().getId(), z.getTiempoRecorrido()));
         }
 
         return list;
@@ -90,9 +90,9 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
 
     private List<ZonaTuristicaDto> mapQueryToDto(List<ZonaTuristicaQuery> zonasQuery) {
         List<ZonaTuristicaDto> zonas = new ArrayList<>();
-        for(ZonaTuristicaQuery query : zonasQuery) {
+        for (ZonaTuristicaQuery query : zonasQuery) {
             ZonaTuristicaDto dto = new ZonaTuristicaDto();
-            String url = getUrl(query.hora, query.temperatura, (int)query.intensidad, query.probabilidad);
+            String url = getUrl(query.hora, query.temperatura, (int) query.intensidad, query.probabilidad);
 
             dto.setEstacion(query.estacion);
             dto.setIdZona(query.idZona);
@@ -125,18 +125,25 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
             } else if (filtros.isSoleado()) {
                 climaOk = esSoleado(zona);
             }
+            boolean actividadesSeleccionadas =
+                    filtros.isCaminata() || filtros.isSenderismo() || filtros.isEscalar() ||
+                            filtros.isAventura() || filtros.isCultural() || filtros.isSurfear() ||
+                            filtros.isCataVinos() || filtros.isRecreativo();
 
-            if (
-                    (filtros.isCaminata()   && zona.getActividad() == 1) ||
+            boolean climaSeleccionado =
+                    filtros.isSoleado() || filtros.isNublado() || filtros.isLluviaLigera();
+
+            boolean actividadOk =
+                    (filtros.isCaminata() && zona.getActividad() == 1) ||
                             (filtros.isSenderismo() && zona.getActividad() == 2) ||
-                            (filtros.isEscalar()    && zona.getActividad() == 3) ||
-                            (filtros.isAventura()   && zona.getActividad() == 4) ||
-                            (filtros.isCultural()   && zona.getActividad() == 5) ||
-                            (filtros.isSurfear()    && zona.getActividad() == 6) ||
-                            (filtros.isCataVinos()  && zona.getActividad() == 7) ||
-                            (filtros.isRecreativo() && zona.getActividad() == 8) &&
-                                    climaOk
-            ) {
+                            (filtros.isEscalar() && zona.getActividad() == 3) ||
+                            (filtros.isAventura() && zona.getActividad() == 4) ||
+                            (filtros.isCultural() && zona.getActividad() == 5) ||
+                            (filtros.isSurfear() && zona.getActividad() == 6) ||
+                            (filtros.isCataVinos() && zona.getActividad() == 7) ||
+                            (filtros.isRecreativo() && zona.getActividad() == 8);
+
+            if ((!actividadesSeleccionadas || actividadOk) && (!climaSeleccionado || climaOk)) {
                 zonas.add(zona);
             }
         }
@@ -153,9 +160,11 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
     private boolean esLluviaLigera(ZonaTuristicaQuery zona) {
         return utilsServcice.isLluviaLigera(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
     }
+
     private boolean esNublado(ZonaTuristicaQuery zona) {
         return utilsServcice.isNublado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
     }
+
     private boolean esSoleado(ZonaTuristicaQuery zona) {
         return utilsServcice.isSoleado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
     }
