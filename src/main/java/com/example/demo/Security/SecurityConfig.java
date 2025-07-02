@@ -28,8 +28,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/zona/**").authenticated()
+                        .requestMatchers("/zona/**", "/usuario/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

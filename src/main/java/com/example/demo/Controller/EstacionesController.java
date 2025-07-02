@@ -55,6 +55,24 @@ public class EstacionesController {
         return mav;
     }
 
+    @GetMapping("/filtrar-zonas/{id}")
+    public ModelAndView getFiltrarEstaciones(@ModelAttribute Filtros filtros, @PathVariable int id) {
+        ModelAndView mav = new ModelAndView("estaciones/zonasturisticas");
+        List<EstacionDto> estaciones = new ArrayList<>();
+        List<ZonaTuristicaDto> zonas = new ArrayList<>();
+        try {
+            estaciones = estacionService.getInfoEstaciones();
+            zonas = zonaService.filtrarByEstacion(id, filtros);
+            mav.addObject("zonas", zonas);
+            mav.addObject("idEstacion", id);
+            mav.addObject("filtros", filtros);
+            mav.addObject("estaciones", estaciones);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mav;
+    }
+
     @PostMapping("/filtrar-zonas/{id}")
     public ModelAndView filtrarEstaciones(@ModelAttribute Filtros filtros, @PathVariable int id) {
         ModelAndView mav = new ModelAndView("estaciones/zonasturisticas");

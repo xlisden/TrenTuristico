@@ -15,7 +15,7 @@ public class Actividad {
 	@Column(name="ActId")
 	private int ActId;
 	
-	@Column(name = "ActNom", length = 30)
+	@Column(name = "ActNombre", length = 30)
 	private String actNom;
 
 	public Actividad() {

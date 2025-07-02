@@ -79,7 +79,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #46630a;
+        background: #345700FF;
         color: white;
         border: none;
         border-radius: 999px;
@@ -89,9 +89,6 @@
         transition: background 0.2s;
         margin-left: 18px;
         margin-bottom: 0.5rem;
-    }
-    .boton:hover {
-        background: #344a07;
     }
     .boton svg {
         width: 20px;
@@ -107,230 +104,14 @@
             min-width: 0;
         }
     }
-
-    /*zonas turisticas*/
-    .zonas-turisticas-lista {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 2.5rem;
-        margin-top: 4rem;
-        margin-bottom: 4rem;
-    }
-    .zona-tarjeta {
-        display: flex;
-        flex-direction: column;
-        width: 350px;
-        border-radius: 22px;
-        overflow: hidden;
-        background: #fafafa;
-        box-shadow: 0 2px 12px 0 rgb(60 60 60 / 0.06);
-        font-family: 'Roboto', sans-serif;
-        border: 1.2px solid #ececec;
-        transition: box-shadow 0.18s;
-    }
-    .zona-tarjeta:hover {
-        box-shadow: 0 4px 24px 0 rgb(52 87 0 / 0.08);
-    }
-    .zona-tarjeta__imagen {
-        width: 100%;
-        height: 78px;
-        background: #d2d2d2;
-        border-bottom: 1px solid #ededed;
-        border-radius: 22px 22px 0 0;
-    }
-    .zona-tarjeta__contenido {
-        padding: 1.1rem 1.3rem 1.1rem 1.3rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.9rem;
-        background: #fff;
-    }
-    .zona-tarjeta__titulo {
-        font-size: 1.23rem;
-        font-weight: 700;
-        margin: 0;
-        color: #191d15;
-    }
-    .zona-tarjeta__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    .zona-tarjeta__titulo-bloque {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-    }
-    .zona-tarjeta__clima-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.33em;
-        min-width: 38px;
-    }
-    .zona-tarjeta__temp {
-        font-size: 1.05rem;
-        color: #6b6b6b;
-        font-weight: 500;
-        min-width: 30px;
-        text-align: center;
-    }
-    .zona-tarjeta__clima-icono {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: #e1e1e1;
-        display: inline-block;
-    }
-    .zona-tarjeta__chip {
-        display: inline-block !important;
-        width: auto !important;
-        max-width: 100%;
-        font-size: 0.90rem;
-        background: #e6e9da;
-        color: #4b5e25;
-        border-radius: 1em;
-        padding: .21em 0.9em;
-        font-weight: 500;
-        white-space: nowrap;
-    }
-    .zona-tarjeta__datos {
-        display: flex;
-        gap: 1.8rem;
-        margin-top: 0.6rem;
-    }
-    .zona-tarjeta__dato {
-        display: flex;
-        align-items: center;
-        gap: .5em;
-        color: #737373;
-        font-size: 1.01rem;
-        font-weight: 500;
-    }
-    .zona-tarjeta__icon {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        vertical-align: middle;
-        margin-right: 2px;
-    }
-    .zona-tarjeta__icon.reloj {
-        background: url('data:image/svg+xml;utf8,<svg fill="rgb(115,121,104)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="rgb(115,121,104)" stroke-width="2"/><path d="M12 8v4l3 3" stroke="rgb(115,121,104)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>') center/contain no-repeat;
-    }
-    .zona-tarjeta__icon.caminar {
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 -960 960 960" width="12px" fill="rgb(115,121,104)"><path d="M220-320q25 0 42.5-17.5T280-380q0-25-17.5-42.5T220-440q-25 0-42.5 17.5T160-380q0 25 17.5 42.5T220-320ZM120-120v-40l60-40q-58 0-99-41t-41-99v-380q0-83 77-121.5T360-880q53 0 100 3.5t87 12.5l-1 82q-34-10-79.5-14T360-800q-86 0-142.5 10T137-760h369l-186 80H120v120h200v80H120v140q0 12 4.5 23t13 19.5q8.5 8.5 19.5 13t23 4.5h221l-34 160H120Zm320 40 112-524-72 28v96h-80v-148l202-86q29-12 59-2.5t47 36.5l40 64q24 42 49.5 69t82.5 27v80q-66 0-103.5-27.5T700-540l-24 80 84 80v300h-80v-240l-84-80-72 320h-84Zm260-660q-33 0-56.5-23.5T620-820q0-33 23.5-56.5T700-900q33 0 56.5 23.5T780-820q0 33-23.5 56.5T700-740Z"/></svg>') center/contain no-repeat;
-    }
-    @media (max-width: 1200px) {
-        .zonas-turisticas-lista {
-            gap: 1.1rem;
-        }
-        .zona-tarjeta {
-            width: 290px;
-        }
-    }
-    @media (max-width: 900px) {
-        .zonas-turisticas-lista {
-            flex-direction: column;
-            align-items: center;
-            gap: 1.2rem;
-        }
-        .zona-tarjeta {
-            width: 92vw;
-            min-width: 0;
-            max-width: 400px;
-        }
-    }
-
 </style>
 <body>
 <div th:replace="~{compartidos/header :: header()}"></div>
 
-<!--zonas turisticas-->
-
-<div class="zonas-turisticas-lista">
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
-                </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
-                </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
-                </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--filtros-->
 
 <div class="floating-filters">
-    <form method="post" th:object="${filtros}" action="/test/procesar" class="floating-filters-row">
-        <!-- Actividades -->
+    <form method="post" th:object="${filtros}" action="/estaciones/filtrar-zonas/1" class="floating-filters-row">
         <div class="section-block">
             <span class="section-title">Actividades</span>
             <div class="chip-checkbox-group">
@@ -368,7 +149,6 @@
                 </div>
             </div>
         </div>
-        <!-- Clima -->
         <div class="section-block">
             <span class="section-title">Clima</span>
             <div class="chip-checkbox-group">
@@ -386,7 +166,7 @@
                 </div>
             </div>
         </div>
-        <!-- Botón -->
+
         <div class="section-block boton-block">
             <button type="submit" class="boton">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">

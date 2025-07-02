@@ -114,8 +114,7 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         boolean nofiltros = isFiltrosFasle(filtros);
         for (ZonaTuristicaQuery zona : zonasQuery) {
             if (nofiltros) {
-                zonas.add(zona);
-                return zonas;
+                return zonasQuery;
             }
 
             boolean climaOk = true;
