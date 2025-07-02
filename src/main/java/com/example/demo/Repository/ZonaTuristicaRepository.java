@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Repository
 public interface ZonaTuristicaRepository extends JpaRepository<ZonaTuristica, Serializable> {
@@ -20,6 +21,6 @@ public interface ZonaTuristicaRepository extends JpaRepository<ZonaTuristica, Se
                     "where r.RepClimaHora = :hora and r.RepClimaEstacion = :estacion and DATE(r.RepClimaFecha) = '2025-07-02'\n" +
                     "order by z.ZonaId asc\n" +
                     ";", nativeQuery = true)
-    public ZonaTuristicaQuery getAllByEstacion(int estacion, int hora);
+    public List<ZonaTuristicaQuery> getAllByEstacion(int estacion, int hora);
 
 }

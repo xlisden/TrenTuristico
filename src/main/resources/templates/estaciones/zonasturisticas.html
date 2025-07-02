@@ -160,6 +160,7 @@
     .zona-tarjeta__titulo-bloque {
         display: flex;
         flex-direction: column;
+        max-width: 75%;
         gap: 0.3rem;
     }
     .zona-tarjeta__clima-box {
@@ -177,23 +178,24 @@
         text-align: center;
     }
     .zona-tarjeta__clima-icono {
-        width: 38px;
-        height: 38px;
+        width: 50px;
+        height: 50px;
         border-radius: 10px;
-        background: #e1e1e1;
+        background: transparent;
         display: inline-block;
     }
     .zona-tarjeta__chip {
-        display: inline-block !important;
-        width: auto !important;
-        max-width: 100%;
+        display: inline-block;
+        max-width: fit-content;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: 0.90rem;
         background: #e6e9da;
         color: #4b5e25;
         border-radius: 1em;
         padding: .21em 0.9em;
         font-weight: 500;
-        white-space: nowrap;
     }
     .zona-tarjeta__datos {
         display: flex;
@@ -249,88 +251,42 @@
 <!--zonas turisticas-->
 
 <div class="zonas-turisticas-lista">
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
+    <div th:each="zona : ${zonas}" th:object="${zona}">
+        <div class="zona-tarjeta">
+            <div class="zona-tarjeta__imagen"></div>
+            <div class="zona-tarjeta__contenido">
+                <div class="zona-tarjeta__header">
+                    <div class="zona-tarjeta__titulo-bloque">
+                        <span th:text="*{zona}" class="zona-tarjeta__titulo"></span>
+                        <span th:text="*{tipoLugar}" class="zona-tarjeta__chip"></span>
+                    </div>
+                    <div class="zona-tarjeta__clima-box">
+                        <img th:src="@{*{url}}" alt="climaicono" class="zona-tarjeta__clima-icono">
+                        <span th:text="*{temperatura+'°'}" class="zona-tarjeta__temp"></span>
+                    </div>
                 </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
-                </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
+                <div class="zona-tarjeta__datos">
+                    <div class="zona-tarjeta__dato">
+                        <span class="zona-tarjeta__icon reloj"></span>
+                        <span th:text="*{recorrido+'min de recorrido'}"></span>
+                    </div>
+                    <div class="zona-tarjeta__dato">
+                        <span class="zona-tarjeta__icon caminar"></span>
+                        <span th:text="*{llegada+'min desde la estación'}" ></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="zona-tarjeta">
-        <div class="zona-tarjeta__imagen"></div>
-        <div class="zona-tarjeta__contenido">
-            <div class="zona-tarjeta__header">
-                <div class="zona-tarjeta__titulo-bloque">
-                    <span class="zona-tarjeta__titulo">La Granja Villa</span>
-                    <span class="zona-tarjeta__chip">Campo Abierto</span>
-                </div>
-                <div class="zona-tarjeta__clima-box">
-                    <span class="zona-tarjeta__clima-icono"></span>
-                    <span class="zona-tarjeta__temp">29°</span>
-                </div>
-            </div>
-            <div class="zona-tarjeta__datos">
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon reloj"></span>
-                    <span>60min de recorrido</span>
-                </div>
-                <div class="zona-tarjeta__dato">
-                    <span class="zona-tarjeta__icon caminar"></span>
-                    <span>20min desde la estación</span>
-                </div>
-            </div>
-        </div>
+    <div th:if="${zonas.size() <= 0}">
+        <h3>No hay zonas turísticas.</h3>
     </div>
 </div>
 
 <!--filtros-->
 
 <div class="floating-filters">
-    <form method="post" th:object="${filtros}" action="/test/procesar" class="floating-filters-row">
-        <!-- Actividades -->
+    <form method="post" th:object="${filtros}" th:action="@{/estaciones/filtrar-zonas/{id}(id=${idEstacion})}" class="floating-filters-row">
         <div class="section-block">
             <span class="section-title">Actividades</span>
             <div class="chip-checkbox-group">
@@ -368,7 +324,6 @@
                 </div>
             </div>
         </div>
-        <!-- Clima -->
         <div class="section-block">
             <span class="section-title">Clima</span>
             <div class="chip-checkbox-group">
@@ -386,7 +341,7 @@
                 </div>
             </div>
         </div>
-        <!-- Botón -->
+
         <div class="section-block boton-block">
             <button type="submit" class="boton">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
