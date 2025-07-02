@@ -5,33 +5,62 @@
 <title>Insert title here</title>
 </head>
 <body>
-	zzzzzzzzzz
-	z
-	zz
-	
-	z
-	z
-	z
-	z
-	z
-	z
-	z
-	z
-	zz
-	z
-	<br>
-	as<br>
-	as<br>
-	as<br>
-	as<br>
-	as<br>
-	as<br>
-	as<br>
-	as
-	s
-	s
-	
-	s
-	s
+
+
+
+
+
+
+
+
+
+<script>
+	let c1 = 0, c2 = 1, c3 = 0; // contadores
+
+	let e = 1; // 1 -> quieto | 2 -> movimiento
+	let esta = 1; // primera estación
+	let di = 1; // 1 ida | 2 vuelta
+	let s = 5; // cantidad de segundos
+	let n=200;
+
+	let salida = "";
+
+	for (let i = 0; i < n; i++) {
+		if (c1 === 3 || c1 === 0) {
+			e = 1;
+			c1 = 0;
+		} else {
+			e = 2;
+
+		}
+		c1++;
+		c2++;
+		salida += `${i + 1} , ${c3} , ${esta} , ${e} , ${di}\n`;
+		c3 += s;
+
+		if (c2 === 3) {
+			if (esta > 13) di = 2;
+			if (di === 2) {
+				if (esta < 2) {
+					esta++;
+					di = 1;
+				} else {
+					esta--;
+				}
+			} else {
+				esta++;
+			}
+			c2 = 0;
+		}
+	}
+
+	console.log(salida); // puedes imprimirlo o usarlo como quieras
+
+</script>
+
+
+
+
+
 </body>
 </html>

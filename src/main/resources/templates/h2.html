@@ -189,8 +189,8 @@
         </div>
 
         <div class="control-group">
-            <label for="startId">ID inicial:</label>
-            <input type="number" id="startId" value="1" min="1">
+            <label for="startId">Segundos ++:</label>
+            <input type="number" id="startId" value="5" min="1">
         </div>
 
         <div class="control-group">
@@ -235,7 +235,7 @@
 <script>
     function generarInserts() {
         const cantidad = parseInt(document.getElementById('cantidad').value);
-        const startId = parseInt(document.getElementById('startId').value);
+        const s = parseInt(document.getElementById('startId').value);
         const horaInicial = document.getElementById('horaInicial').value;
 
         if (!cantidad || cantidad < 1) {
@@ -246,20 +246,19 @@
         const [horaIni, minutoIni] = horaInicial.split(':').map(Number);
 
         let inserts = [];
-        let currentId = startId;
+        let currentId = 1;
         let  c=0;
-        let segundos = 0;
         let ubicacion = 1;
         let direccion = 1; // 1 = subiendo (1→14), 2 = bajando (14→1)
-        let estadoIndex = 0;
-        let subiendo = true;
+        let estado=1;
+        let segundos = 0;
 
-        // Patrón de estado: 2,1,1,2,1,1,2,1,1,2...
-        const patronEstado = [2, 1, 1];
+        let c1 = 0, c2 = 1;
+
 
         for (let i = 0; i < cantidad; i++) {
             // Calcular hora actual
-            const totalSegundos = (horaIni * 3600) + (minutoIni * 60) + segundos;
+            const totalSegundos = (horaIni * 3600) + (minutoIni * 60)+ segundos ;
             const horas = Math.floor(totalSegundos / 3600) % 24;
             const minutos = Math.floor((totalSegundos % 3600) / 60);
             const segs = totalSegundos % 60;
@@ -267,7 +266,15 @@
             const horaStr = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segs.toString().padStart(2, '0')}`;
 
             // Estado según patrón
-            const estado = patronEstado[estadoIndex % patronEstado.length];
+            if (c1 === 3 || c1 === 0) {
+                estado = 1;
+                c1 = 0;
+            } else {
+                estado= 2;
+            }
+            c1++;
+
+            c2++;
 
             // Generar INSERT
             if(i===0){
@@ -288,29 +295,21 @@
 
             // Incrementar valores para siguiente iteración
             currentId++;
-            segundos += 5;
-            estadoIndex++;
+            segundos += s;
 
-            // Actualizar ubicación y dirección
-            if (subiendo) {
-                c++;
-                if(c===3){
-                    c=0;
+            if (c2 === 3) {
+                if (ubicacion > 13) direccion = 2;
+                if (direccion === 2) {
+                    if (ubicacion < 2) {
+                        ubicacion++;
+                        direccion = 1;
+                    } else {
+                        ubicacion--;
+                    }
+                } else {
                     ubicacion++;
                 }
-
-                if (ubicacion > 14) {
-                    ubicacion = 13; // Empezar a bajar desde 13
-                    subiendo = false;
-                    direccion = 2; // Cambiar dirección a bajando
-                }
-            } else {
-                ubicacion--;
-                if (ubicacion < 1) {
-                    ubicacion = 2; // Empezar a subir desde 2
-                    subiendo = true;
-                    direccion = 1; // Cambiar dirección a subiendo
-                }
+                c2 = 0;
             }
         }
 
