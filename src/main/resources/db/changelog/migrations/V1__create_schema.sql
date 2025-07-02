@@ -31,6 +31,7 @@ CREATE TABLE Usuario (
     UserUsername VARCHAR(100) NOT NULL,
     UserPassword VARCHAR(300) NOT NULL,
     UserActivo BIT NOT NULL,
+    UserSesionActiva BIT NOT NULL DEFAULT 0,
     PRIMARY KEY (UserId),
     UNIQUE KEY UserDni_UNIQUE (UserDni)
 );

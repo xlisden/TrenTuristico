@@ -534,7 +534,7 @@
                 <button onclick="eleccion(5)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'" >
+        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'" >
             <div class="station-name"><label th:text="${esta.get(6).getNombre()}"></label></div>
             <div class="weather-info">
                 <img th:src="@{${estaciones.get(6).getIcono()}}" alt="climaicono" class="weather-icon">
