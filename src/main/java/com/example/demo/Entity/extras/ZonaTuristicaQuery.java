@@ -10,14 +10,14 @@ public class ZonaTuristicaQuery {
     public int llegada;
     public int hora;
     public double temperatura;
-    public int probabilidad;
     public double intensidad;
+    public int probabilidad;
     public int actividad;
 
     public ZonaTuristicaQuery() {
     }
 
-    public ZonaTuristicaQuery(int estacion, int idZona, String zona, int tipoLugar, int recorrido, int llegada, int hora, double temperatura, int probabilidad, double intensidad, int actividad) {
+    public ZonaTuristicaQuery(int estacion, int idZona, String zona, int tipoLugar, int recorrido, int llegada, int hora, double temperatura, double intensidad, int probabilidad, int actividad) {
         this.estacion = estacion;
         this.idZona = idZona;
         this.zona = zona;
@@ -26,8 +26,8 @@ public class ZonaTuristicaQuery {
         this.llegada = llegada;
         this.hora = hora;
         this.temperatura = temperatura;
-        this.probabilidad = probabilidad;
         this.intensidad = intensidad;
+        this.probabilidad = probabilidad;
         this.actividad = actividad;
     }
 

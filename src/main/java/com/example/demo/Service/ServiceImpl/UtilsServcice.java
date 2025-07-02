@@ -24,6 +24,30 @@ public class UtilsServcice {
         return 0;
     }
 
+    public boolean isSoleado(double temperatura, int intensidad, int probabilidad) {
+        if (intensidad == 0 && temperatura >= 20)
+            return true;
+        if (intensidad >= 1 && intensidad <= 3) {
+            if (temperatura > 20 && probabilidad < 30)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isNublado(double temperatura, int intensidad, int probabilidad) {
+        if (intensidad >= 1 && intensidad <= 3) {
+            if (temperatura < 20 && probabilidad < 30)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isLluviaLigera(double temperatura, int intensidad, int probabilidad) {
+        if (intensidad == 1 && probabilidad > 30)
+            return true;
+        return false;
+    }
+
     public String getUrl(boolean esDeDia, double temperatura, int intensidad, int probabilidad) {
         if (intensidad == 0) {
             if (temperatura < 16)
