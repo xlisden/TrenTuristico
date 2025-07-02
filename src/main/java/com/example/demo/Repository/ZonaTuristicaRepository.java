@@ -18,7 +18,7 @@ public interface ZonaTuristicaRepository extends JpaRepository<ZonaTuristica, Se
                     "from zonaturistica z\n" +
                     "inner join reporteclima r \n" +
                         "on r.RepClimaEstacion = z.ZonaEstacion\n" +
-                    "where r.RepClimaHora = :hora and r.RepClimaEstacion = :estacion and DATE(r.RepClimaFecha) = '2025-07-02'\n" +
+                    "where r.RepClimaHora = :hora and r.RepClimaEstacion = :estacion and DATE(r.RepClimaFecha) = CURRENT_DATE()\n" +
                     "order by z.ZonaId asc\n" +
                     ";", nativeQuery = true)
     public List<ZonaTuristicaQuery> getAllByEstacion(int estacion, int hora);

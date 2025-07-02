@@ -95,7 +95,7 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, filtros);
-            mav.addObject("zonas", zonas);
+            mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estaciones);
