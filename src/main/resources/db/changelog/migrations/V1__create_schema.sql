@@ -23,17 +23,17 @@ CREATE TABLE Actividad
 );
 
 CREATE TABLE Usuario (
-                         UserId INT NOT NULL AUTO_INCREMENT,
-                         UserDni VARCHAR(8) NOT NULL,
-                         UserNombre VARCHAR(50) NOT NULL,
-                         UserApPaterno VARCHAR(50) NOT NULL,
-                         UserApMaterno VARCHAR(50) NOT NULL,
-                         UserUsername VARCHAR(100) NOT NULL,
-                         UserPassword VARCHAR(300) NOT NULL,
-                         UserActivo BIT NOT NULL,
-                         UserSesionActiva BIT NOT NULL DEFAULT 0,
-                         PRIMARY KEY (UserId),
-                         UNIQUE KEY UserDni_UNIQUE (UserDni)
+    UserId INT NOT NULL AUTO_INCREMENT,
+    UserDni VARCHAR(8) NOT NULL,
+    UserNombre VARCHAR(50) NOT NULL,
+    UserApPaterno VARCHAR(50) NOT NULL,
+    UserApMaterno VARCHAR(50) NOT NULL,
+    UserUsername VARCHAR(100) NOT NULL,
+    UserPassword VARCHAR(300) NOT NULL,
+    UserActivo BIT NOT NULL,
+    UserSesionActiva BIT NOT NULL DEFAULT 0,
+    PRIMARY KEY (UserId),
+    UNIQUE KEY UserDni_UNIQUE (UserDni)
 );
 
 CREATE TABLE ZonaTuristica
