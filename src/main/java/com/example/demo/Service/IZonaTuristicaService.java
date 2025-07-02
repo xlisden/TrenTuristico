@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import java.util.List;
 
+import com.example.demo.Entity.ZonaTuristica;
 import com.example.demo.Entity.dto.PronosticoClimaDto;
 import com.example.demo.Entity.dto.ZonaDto;
 import com.example.demo.Entity.dto.ZonaTuristicaDto;
@@ -16,4 +17,9 @@ public interface IZonaTuristicaService {
 
     public abstract List<ZonaTuristicaDto> filtrarByEstacion(int estacion, Filtros filtros);
 
+    public abstract List<ZonaTuristica> listarZonas();
+    public abstract ZonaTuristica obtenerZonaPorId(int id);
+    public abstract void guardarZona(ZonaTuristica zona);
+    public abstract void actualizarZona(ZonaTuristica zona);
+    public abstract void desactivarZona(int id);
 }

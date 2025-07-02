@@ -54,6 +54,35 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         return list;
     }
 
+    @Override
+    public List<ZonaTuristica> listarZonas() {
+        return zonaRepository.findAll();
+    }
+
+    @Override
+    public ZonaTuristica obtenerZonaPorId(int id) {
+        return zonaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void guardarZona(ZonaTuristica zona) {
+        zonaRepository.save(zona);
+    }
+
+    @Override
+    public void actualizarZona(ZonaTuristica zona) {
+        zonaRepository.save(zona);
+    }
+
+    @Override
+    public void desactivarZona(int id) {
+        ZonaTuristica zona = zonaRepository.findById(id).orElse(null);
+        if (zona != null) {
+            zona.setActivo(false);
+            zonaRepository.save(zona);
+        }
+    }
+  
     private String getUrl(int hora, double temperatura, int intensidad, int probabilidad) {
         boolean esDia = hora < 16;
         return utilsServcice.getUrl(esDia, temperatura, intensidad, probabilidad);
@@ -131,6 +160,5 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
     private boolean esSoleado(ZonaTuristicaQuery zona) {
         return utilsServcice.isSoleado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
     }
-
 
 }

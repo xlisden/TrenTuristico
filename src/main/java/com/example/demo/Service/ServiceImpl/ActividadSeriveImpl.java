@@ -10,6 +10,7 @@ import com.example.demo.Entity.Actividad;
 import com.example.demo.Repository.ActividadRepository;
 import com.example.demo.Service.ActividadService;
 
+
 @Service("actiservice")
 public class ActividadSeriveImpl implements ActividadService{
 	
@@ -18,7 +19,7 @@ public class ActividadSeriveImpl implements ActividadService{
 	private ActividadRepository actirepo;
 
 	@Override
-	public List<Actividad> findAllActi() {
+	public List<Actividad> listar() {
 		return actirepo.findAll();
 	}
 
