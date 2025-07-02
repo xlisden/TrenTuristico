@@ -19,6 +19,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	@Qualifier("usurepository")
 	private UsuarioRepository usurepository;
+	@Override
+	public List<Usuario> listaSimple() {
+		return usurepository.findAll();
+	}
 
 
 	@Override

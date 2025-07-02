@@ -10,5 +10,6 @@ public interface UsuarioService {
     public abstract Usuario obtenerUsuario(int id);
     public abstract void desactivarUsuario(int id);
     public Usuario buscarPorUsername(String username);
+    public abstract List<Usuario> listaSimple();
 
 }
