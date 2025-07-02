@@ -260,10 +260,10 @@
         background: white;
         border-radius: 12px;
         padding: 25px;
-        width: 500px;        /* Ancho fijo - MODIFICAR AQUÍ */
+        width: 400px;        /* Ancho fijo - MODIFICAR AQUÍ */
         height: 300px;       /* Alto fijo - MODIFICAR AQUÍ */
         position: fixed;
-        bottom: 20px;
+        bottom: 100px;
         right: 20px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         border: 1px solid #e0e0e0;
@@ -301,20 +301,6 @@
         color: #333;
         margin-bottom: 20px;
         display: block;
-    }
-    .card-button {
-        background-color: #22c55e;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-    }
-    .card-button:hover {
-        background-color: #16a34a;
     }
     @keyframes slideInRight {
         from {
@@ -452,12 +438,12 @@
     </p>
     <div class="stations-grid">
 
-        <div class="station-card" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(0).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"  >
+            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'"><label th:text="${esta.get(0).getNombre()}"></label></div>
+            <div class="weather-info"    th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(0).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(0).getTemperatura()}" class="weather-icon-texto"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(0).getNroZonasTuristicas()}"></label></div>
 
@@ -466,12 +452,12 @@
             </div>
         </div>
 
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(1).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card" >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'" ><label th:text="${esta.get(1).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(1).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(1).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(1).getNroZonasTuristicas()}"></label></div>
 
@@ -480,12 +466,12 @@
             </div>
         </div>
 
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(2).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"  >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'"><label th:text="${esta.get(2).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(2).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(2).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(2).getNroZonasTuristicas()}"></label></div>
 
@@ -493,12 +479,12 @@
                 <button onclick="eleccion(2)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(3).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"  >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'" ><label th:text="${esta.get(3).getNombre()}"></label></div>
+            <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(3).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(3).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(3).getNroZonasTuristicas()}"></label></div>
 
@@ -507,12 +493,12 @@
             </div>
         </div>
 
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(4).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"  >
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" ><label th:text="${esta.get(4).getNombre()}"></label></div>
+            <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(4).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(4).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" >
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(4).getNroZonasTuristicas()}"></label></div>
 
@@ -521,12 +507,12 @@
             </div>
         </div>
 
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(5).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"   >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'"><label th:text="${esta.get(5).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(5).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(5).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'" >
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(5).getNroZonasTuristicas()}"></label></div>
 
@@ -534,12 +520,12 @@
                 <button onclick="eleccion(5)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(6).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"   >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'"><label th:text="${esta.get(6).getNombre()}"></label></div>
+            <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(6).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(6).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(6).getNroZonasTuristicas()}"></label></div>
 
@@ -574,12 +560,12 @@
 
     <div class="stations-grid">
 
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(7).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"  >
+            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'"><label th:text="${esta.get(7).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(7).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(7).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(7).getNroZonasTuristicas()}"></label></div>
 
@@ -587,12 +573,13 @@
                 <button onclick="eleccion(7)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(8).getNombre()}"></label></div>
-            <div class="weather-info">
+
+        <div class="station-card"   >
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'"><label th:text="${esta.get(8).getNombre()}"></label></div>
+            <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(8).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(8).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(8).getNroZonasTuristicas()}"></label></div>
 
@@ -600,12 +587,13 @@
                 <button onclick="eleccion(8)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(9).getNombre()}"></label></div>
-            <div class="weather-info">
+
+        <div class="station-card"   >
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'"><label th:text="${esta.get(9).getNombre()}"></label></div>
+            <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(9).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(9).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(9).getNroZonasTuristicas()}"></label></div>
 
@@ -613,12 +601,12 @@
                 <button onclick="eleccion(9)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(10).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card" >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" ><label th:text="${esta.get(10).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(10).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(10).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" >
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(10).getNroZonasTuristicas()}"></label></div>
 
@@ -626,12 +614,13 @@
                 <button onclick="eleccion(10)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(11).getNombre()}"></label></div>
-            <div class="weather-info">
+
+        <div class="station-card"   >
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'"><label th:text="${esta.get(11).getNombre()}"></label></div>
+            <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(11).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(11).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(11).getNroZonasTuristicas()}"></label></div>
 
@@ -639,12 +628,13 @@
                 <button onclick="eleccion(11)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(12).getNombre()}"></label></div>
-            <div class="weather-info">
+
+        <div class="station-card"  >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'"><label th:text="${esta.get(12).getNombre()}"></label></div>
+            <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(12).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(12).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(12).getNroZonasTuristicas()}"></label></div>
 
@@ -652,12 +642,12 @@
                 <button onclick="eleccion(12)" > Elegir destino </button>
             </div>
         </div>
-        <div class="station-card"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'" >
-            <div class="station-name"><label th:text="${esta.get(13).getNombre()}"></label></div>
-            <div class="weather-info">
+        <div class="station-card"   >
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'"><label th:text="${esta.get(13).getNombre()}"></label></div>
+            <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(13).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(13).getTemperatura()}"></label></div>
-            <div class="passenger-info">
+            <div class="passenger-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'">
                 <div class="passenger-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#787F6C"><path d="m40-240 240-320 180 240h300L560-586 460-454l-50-66 150-200 360 480H40Zm521-80Zm-361 0h160l-80-107-80 107Zm0 0h160-160Z"/></svg></div>
                 <label th:text="${esta.get(13).getNroZonasTuristicas()}"></label></div>
 
@@ -672,13 +662,14 @@
         <button class="close-btn" onclick="cerrarEleccion()">×</button>
         <div class="card-content">
             <label id="card-label" class="card-label">  texto en el js ->>> </label>
-            <label class="card-label">" tarifa "</label>
-            <label  class="card-label">" tiempo de llegada del tren  "</label>
-            <label  class="card-label">" clima de la estacion "</label>
-            <label  class="card-label">" etc. no se más "</label>
+            <span class="pasaje">Estación origen: </span> <label id="esta_o" >casa</label> <br><br>
+            <span class="pasaje">Pasaje: </span> S/1.50  <br><br>
+            <span class="pasaje">El tren pasará dentro de: </span>  <label id="esta_t1" >21</label>  <br><br>
+            <span class="pasaje">Tiempo aprox. del viaje: </span>  <label id="esta_t2" >41</label> <br><br>
+
+            <img id="pie-fondo-emergente" th:src="@{/img/Estaciones/fondoT1.jpg}" height="110" width="400"  >
         </div>
     </div>
-
 
     <!--zonas turisticas-->
 
@@ -717,12 +708,10 @@
 </div>
 
 <script th:inline="javascript">
-    // Datos del servidor convertidos a JSON
     const estaciones = /*[[${esta}]]*/ [];
     const horas = /*[[${horas}]]*/ [];
     const zonas = /*[[${zonas}]]*/ [];
-    let ubi=0;
-    let ubia=0;
+    let ubi=0;    let ubia=0;
 
 
     // Función para parsear string de tiempo incluyendo segundos
@@ -733,45 +722,20 @@
         return date;
     }
 
-    // Función para comparar si un tiempo es anterior (incluyendo segundos)
-    function isTimeBefore(time1, time2) {
-        return time1.getTime() <= time2.getTime();
-    }
+    function mostrarTren() {
 
-    // Función para comparar si un tiempo es posterior (incluyendo segundos)
-    function isTimeAfter(time1, time2) {
-        return time1.getTime() >= time2.getTime();
-    }
-
-    // Función para obtener la hora actual con precisión de segundos
-    function getCurrentTime() {
-        return new Date();
-    }
-
-    // Función para mostrar el mensaje
-    function mostrarMensaje() {
-        let mensaje = 'No hay tren'; // Mensaje por defecto
-        let backgroundColor = '#4CAF50'; // Color verde por defecto
-
-        // Verificar si la hora actual está en algún rango de horas
         for (let i = 1; i < horas.length; i++) {
             try {
-                // Convertir las horas string a objetos Date para comparación (con segundos)
                 const t1 = parseTimeString(horas[i].hora);
-                const t2 = getCurrentTime(); // Hora actual con segundos
+                const t2 = new Date(); // Hora actual con segundos
                 const tAnterior = parseTimeString(horas[i-1].hora);
 
-                // Comparar si la hora anterior es menor o igual que la actual
-                // Y la hora siguiente es mayor o igual que la actual
-                if (isTimeBefore(tAnterior, t2) && isTimeAfter(t1, t2)) {
+                if (tAnterior.getTime() <= t2.getTime() && t1.getTime() >= t2.getTime()) {
 
-                    mensaje = 'Estación: ' + horas[i-1].estacionUbi;
                     ubi = horas[i-1].estacionUbi;
                     let direc = horas[i-1].direccion;
                     let estad = horas[i-1].estado;
-                    backgroundColor = '#2196F3'; // Azul para ubicación
 
-                    // Restaurar imagen anterior si existe
                     if(ubia !== 0) {
                         document.getElementById(ubia.toString()).src = "/icons/iconos/circulo.svg";
                         document.getElementById(ubia.toString()).style.width = "50px";
@@ -779,28 +743,71 @@
                         document.getElementById(ubia.toString()).style.transform = "none"; // Resetear transformación
                     }
 
-                    // Establecer nueva imagen según estado
                     if(estad === 2) {
                         document.getElementById(ubi.toString()).src = "/icons/iconos/trensito2.svg";
                     } else {
                         document.getElementById(ubi.toString()).src = "/icons/iconos/trensito.svg";
                     }
-
-                    // Aplicar dirección (voltear imagen si es necesario)
                     if(direc === 2) {
                         document.getElementById(ubi.toString()).style.transform = "scaleX(-1)";
                     } else {
                         document.getElementById(ubi.toString()).style.transform = "none";
                     }
-
                     document.getElementById(ubi.toString()).style.width = "100px";
                     document.getElementById(ubi.toString()).style.height = "100px";
                     ubia = ubi;
 
-                    break; // Salir del bucle una vez encontrado
+                    break;
                 }
             } catch (error) {
-                mensaje = 'no estacion';
+                ubi=ubi;
+            }
+        }
+    }
+
+    function formatTiempo(segundos) {
+        if (segundos < 60) {
+            return `${segundos} sec`;
+        } else if (segundos < 3600) {
+            const min = Math.floor(segundos / 60);
+            const sec = segundos % 60;
+            return `${min} min   ${sec}sec`;
+        } else {
+            const hrs = Math.floor(segundos / 3600);
+            const min = Math.floor((segundos % 3600) / 60);
+            return `${hrs} h   ${min}min`;
+        }
+    }
+
+    function t(ubi) {
+        const des = ubi+1; // estación destino
+        const ori = 3;  // estación origen
+        document.getElementById('esta_o').textContent = `${estaciones[ori-1].nombre}`;
+        let direc = 2;
+        const now = new Date();
+        let abor = null;
+        let tf = null;
+
+        if (des > ori) direc = 1;
+
+        for (const ht of horas) {
+            const hora = parseTimeString(ht.hora); // 'HH:mm'
+            const ubi = ht.estacionUbi;
+            const dic = ht.direccion;
+            const est = ht.estado;
+
+            if (hora > now && ori === ubi && dic === direc && est === 2) {
+                abor = hora;
+            }
+
+            if (abor && ubi === des && est === 2) {
+                tf = hora;
+                const durAbordaje = Math.floor((abor - now) / 1000);
+                const durViaje = Math.floor((tf - abor) / 1000);
+                document.getElementById('esta_t1').textContent = formatTiempo(durAbordaje);
+                document.getElementById('esta_t2').textContent = formatTiempo(durViaje);
+                document.getElementById('pie-fondo-emergente').src = "/img/Estaciones/fondoT"+ubi+".jpg";
+                return;
             }
         }
     }
@@ -808,9 +815,9 @@
     function eleccion(numero) {
         const card = document.getElementById('eleccion-card');
         const label = document.getElementById('card-label');
-
+        t(numero);
         // Actualizar el contenido del label con el número recibido
-        label.textContent = `Estación Seleccionada : ${numero}`;// mandar estacion[numero].nombre o algo asi
+        label.textContent = `Estación Destino : ${estaciones[numero].nombre}`;// mandar estacion[numero].nombre o algo asi
 
         // Mostrar la tarjeta
         card.style.display = 'block';
@@ -822,54 +829,15 @@
         card.style.display = 'none';
     }
 
-    // Función del botón dentro de la tarjeta
-    function accionBoton() {
-        const label = document.getElementById('card-label');
-        alert(`Confirmaste: ${label.textContent}`);
-    }
-
-    function mainAction(number) {
-        const contentTop = document.getElementById('contentTop');
-        const contentBottom = document.getElementById('contentBottom');
-
-        // Obtener la estación (ajustar índice porque los arrays empiezan en 0)
-        const estacio = estaciones[number - 1];
-
-        if (estacio) {
-            // Filtrar las zonas que pertenecen a esta estación
-            const zonasDeEstacion = zonas.filter(zona => zona.estacion === estacio.idEstacion);
-
-            // Crear el HTML para las zonas
-            let zonasHTML = '';
-            if (zonasDeEstacion.length > 0) {
-                zonasDeEstacion.forEach(zona => {
-                    zonasHTML += `<label>${zona.nombre}</label>`+` -  Duracion Recorrido aprox   `+`<label>${zona.dura}</label> min<br>`;
-                });
-            }else{
-                zonasHTML = 'No hay zonas turísticas';
-            }
-
-            contentTop.innerHTML = `
-        <div>
-            <h3>Estación ${estacio.nombre}</h3><br><br><br>
-            <label>Temperatura:</label><br>
-            <label>${estacio.temperatura}°C</label><br><br>
-            <label>Zonas Turísticas:</label><br><br>
-            ${zonasHTML}
-        </div>`;
-        }else {
-            contentTop.innerHTML = `<div>No hay datos para la estación ${number}</div>`;
-        }
-    }
 
     // Generar botones al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
 
         // NUEVO: Mostrar mensaje cada 1 minuto (60000 ms)
-        setInterval(mostrarMensaje, 5000);
+        setInterval(mostrarTren, 5000);
 
         // Mostrar el primer mensaje después de 5 segundos de cargar la página
-        setTimeout(mostrarMensaje, 1000);
+        setTimeout(mostrarTren, 0);
     });
 </script>
 
