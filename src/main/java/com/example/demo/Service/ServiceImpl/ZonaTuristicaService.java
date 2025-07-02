@@ -82,7 +82,7 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
             zonaRepository.save(zona);
         }
     }
-  
+
     private String getUrl(int hora, double temperatura, int intensidad, int probabilidad) {
         boolean esDia = hora < 16;
         return utilsServcice.getUrl(esDia, temperatura, intensidad, probabilidad);
@@ -124,18 +124,18 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
                 climaOk = esNublado(zona) || esSoleado(zona);
             } else if (filtros.isSoleado()) {
                 climaOk = esSoleado(zona);
-            }     
-            
+            }
+
             if (
                     (filtros.isCaminata()   && zona.getActividad() == 1) ||
-                    (filtros.isSenderismo() && zona.getActividad() == 2) ||
-                    (filtros.isEscalar()    && zona.getActividad() == 3) ||
-                    (filtros.isAventura()   && zona.getActividad() == 4) ||
-                    (filtros.isCultural()   && zona.getActividad() == 5) ||
-                    (filtros.isSurfear()    && zona.getActividad() == 6) ||
-                    (filtros.isCataVinos()  && zona.getActividad() == 7) ||
-                    (filtros.isRecreativo() && zona.getActividad() == 8) &&
-                    climaOk
+                            (filtros.isSenderismo() && zona.getActividad() == 2) ||
+                            (filtros.isEscalar()    && zona.getActividad() == 3) ||
+                            (filtros.isAventura()   && zona.getActividad() == 4) ||
+                            (filtros.isCultural()   && zona.getActividad() == 5) ||
+                            (filtros.isSurfear()    && zona.getActividad() == 6) ||
+                            (filtros.isCataVinos()  && zona.getActividad() == 7) ||
+                            (filtros.isRecreativo() && zona.getActividad() == 8) &&
+                                    climaOk
             ) {
                 zonas.add(zona);
             }

@@ -82,4 +82,3 @@ public class SecurityConfig {
         return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 }
-
