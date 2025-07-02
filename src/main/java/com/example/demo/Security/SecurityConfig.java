@@ -68,7 +68,7 @@ public class SecurityConfig {
         for (Usuario usuario : lista) {
 
             UserDetails user = User.withUsername(usuario.getUsername())
-                    .password(passwordEncoder().encode(usuario.getPassword()))
+                    .password(usuario.getPassword())
                     .roles("ADMIN")
                     .build();
             users.add(user);
@@ -79,7 +79,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 }
 
