@@ -109,15 +109,4 @@ public class EstacionesController {
         return mav;
     }
 
-    @GetMapping("/api/{id}")
-    public List<ZonaTuristicaDto> getZonasPorEstacionApi(@PathVariable int id) {
-        List<ZonaTuristicaDto> zonas = new ArrayList<>();
-        try {
-            zonas = zonaService.filtrarByEstacion(id, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return zonas;
-    }
-
 }
