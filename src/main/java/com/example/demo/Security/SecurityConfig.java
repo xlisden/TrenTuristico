@@ -28,8 +28,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/zona/**").authenticated()
+                        .requestMatchers("/zona/**", "/usuario/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
@@ -67,7 +68,7 @@ public class SecurityConfig {
         for (Usuario usuario : lista) {
 
             UserDetails user = User.withUsername(usuario.getUsername())
-                    .password(passwordEncoder().encode(usuario.getPassword()))
+                    .password(usuario.getPassword())
                     .roles("ADMIN")
                     .build();
             users.add(user);
@@ -78,7 +79,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 }
-

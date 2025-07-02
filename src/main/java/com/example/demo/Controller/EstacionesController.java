@@ -4,6 +4,7 @@ package com.example.demo.Controller;
 import com.example.demo.Entity.dto.EstacionDto;
 import com.example.demo.Entity.dto.ZonaTuristicaDto;
 import com.example.demo.Entity.extras.Filtros;
+import com.example.demo.Service.HorTrenService;
 import com.example.demo.Service.IEstacionService;
 import com.example.demo.Service.IZonaTuristicaService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class EstacionesController {
 
     private final IEstacionService estacionService;
     private final IZonaTuristicaService zonaService;
+    private final HorTrenService horTrenService;
 
     @GetMapping("")
     public ModelAndView getEstaciones() {
@@ -30,6 +32,10 @@ public class EstacionesController {
             estaciones = estacionService.getInfoEstaciones();
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estaciones);
+
+            mav.addObject("esta",estacionService.getInfoEstaciones());
+            mav.addObject("horas",horTrenService.findAllHorarioTren());
+            mav.addObject("zonas",zonaService.findAllZonaTuristica());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,10 +51,36 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, null);
-            mav.addObject("zonas", zonas);
+            mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estaciones);
+
+            mav.addObject("esta",estacionService.getInfoEstaciones());
+            mav.addObject("horas",horTrenService.findAllHorarioTren());
+            mav.addObject("zonas",zonaService.findAllZonaTuristica());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mav;
+    }
+
+    @GetMapping("/filtrar-zonas/{id}")
+    public ModelAndView getFiltrarEstaciones(@ModelAttribute Filtros filtros, @PathVariable int id) {
+        ModelAndView mav = new ModelAndView("estaciones/zonasturisticas");
+        List<EstacionDto> estaciones = new ArrayList<>();
+        List<ZonaTuristicaDto> zonas = new ArrayList<>();
+        try {
+            estaciones = estacionService.getInfoEstaciones();
+            zonas = zonaService.filtrarByEstacion(id, filtros);
+            mav.addObject("zonasDaye", zonas);
+            mav.addObject("idEstacion", id);
+            mav.addObject("filtros", filtros);
+            mav.addObject("estaciones", estaciones);
+
+            mav.addObject("esta",estacionService.getInfoEstaciones());
+            mav.addObject("horas",horTrenService.findAllHorarioTren());
+            mav.addObject("zonas",zonaService.findAllZonaTuristica());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,10 +95,14 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, filtros);
-            mav.addObject("zonas", zonas);
+            mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estaciones);
+
+            mav.addObject("esta",estacionService.getInfoEstaciones());
+            mav.addObject("horas",horTrenService.findAllHorarioTren());
+            mav.addObject("zonas",zonaService.findAllZonaTuristica());
         } catch (Exception e) {
             e.printStackTrace();
         }

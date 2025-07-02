@@ -13,7 +13,7 @@ public interface ReporteClimaRepository extends JpaRepository<ReporteClima, Seri
 
     @Query(value = "select r.RepClimaEstacion as estacion, r.RepClimaTemp as temperatura, r.RepClimaProbabilidadLluvia as probabilidad, r.RepClimaIntensidadLluvia as intensidad\n" +
             "from reporteclima r \n" +
-            "where r.RepClimaHora = :hora and DATE(r.RepClimaFecha) = '2025-07-02' and r.RepClimaEstacion = :estacion\n" +
+            "where r.RepClimaHora = :hora and DATE(r.RepClimaFecha) = CURRENT_DATE() and r.RepClimaEstacion = :estacion\n" +
             ";", nativeQuery = true)
     public AyudaClima getClimaPorEstacionHora(int estacion, int hora);
 
@@ -25,7 +25,7 @@ public interface ReporteClimaRepository extends JpaRepository<ReporteClima, Seri
     @Query(value = "select e.EstId, r.RepClimaHora, r.RepClimaTemp, r.RepClimaProbabilidadLluvia, r.RepClimaIntensidadLluvia, DATE_FORMAT(r.RepClimaFecha, \"%m/%d/%Y\")\n" +
             "from estacion e \n" +
             "inner join reporteclima r \n" +
-                "on r.RepClimaEstacion = e.EstId\n" +
+            "on r.RepClimaEstacion = e.EstId\n" +
             "where r.RepClimaEstacion = :estacion\n" +
             ";", nativeQuery = true)
     public List<ReporteClimaQuery> getClimaPorEstacion(int estacion);
