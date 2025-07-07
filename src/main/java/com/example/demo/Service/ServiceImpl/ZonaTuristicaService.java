@@ -4,6 +4,7 @@ import com.example.demo.Entity.ZonaTuristica;
 import com.example.demo.Entity.dto.PronosticoClimaDto;
 import com.example.demo.Entity.dto.ZonaDto;
 import com.example.demo.Entity.dto.ZonaTuristicaDto;
+import com.example.demo.Entity.enums.ActividadEnum;
 import com.example.demo.Entity.enums.TipoLugarEnum;
 import com.example.demo.Entity.extras.Filtros;
 import com.example.demo.Entity.extras.ZonaTuristicaQuery;
@@ -30,7 +31,7 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         List<ZonaTuristicaQuery> zonasQuery = zonaRepository.getAllByEstacion(estacion, hora);
 
         if (filtros != null) {
-            zonasQuery = filtrar(zonasQuery, filtros);
+            zonasQuery = filtrarZonasPorClimaActividad(zonasQuery, filtros);
         }
 
         List<ZonaTuristicaDto> zonas = mapQueryToDto(zonasQuery);
@@ -109,6 +110,94 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         return zonas;
     }
 
+    private List<ZonaTuristicaQuery> filtrarZonasPorClimaActividad(List<ZonaTuristicaQuery> zonasQuery, Filtros filtros) {
+        List<ZonaTuristicaQuery> zonas = new ArrayList<>();
+        boolean nofiltros = isFiltrosFasle(filtros);
+        for (ZonaTuristicaQuery zona : zonasQuery) {
+            if (nofiltros) {
+                return zonasQuery;
+            }
+
+            if (!isClimaFalse(filtros)) {
+                if (filtros.isLluviaLigera()) {
+                    if (esLluviaLigera(zona) || esNublado(zona) || esSoleado(zona)) {
+                        zonas = getZonaPorActividad(filtros, zonas, zona);
+                    }
+                } else if (filtros.isNublado()) {
+                    if (esNublado(zona) || esSoleado(zona)) {
+                        zonas = getZonaPorActividad(filtros, zonas, zona);
+                    }
+                }
+                if (filtros.isSoleado()) {
+                    if (esSoleado(zona)) {
+                        zonas = getZonaPorActividad(filtros, zonas, zona);
+                    }
+                }
+            } else {
+                zonas = getZonaPorActividad(filtros, zonas, zona);
+            }
+
+        }
+        return zonas;
+    }
+
+    private List<ZonaTuristicaQuery> getZonaPorActividad(Filtros filtros, List<ZonaTuristicaQuery> zonas, ZonaTuristicaQuery zona) {
+        if (isActividadesFalse(filtros)) {
+            zonas.add(zona);
+            return zonas;
+        }
+
+        if (filtros.isCaminata() && zona.actividad == ActividadEnum.CAMINATA)
+            zonas.add(zona);
+        else if (filtros.isSenderismo() && zona.actividad == ActividadEnum.SENDERISMO)
+            zonas.add(zona);
+        else if (filtros.isEscalar() && zona.actividad == ActividadEnum.ESCALAR)
+            zonas.add(zona);
+        else if (filtros.isAventura() && zona.actividad == ActividadEnum.AVENTURA)
+            zonas.add(zona);
+        else if (filtros.isCultural() && zona.actividad == ActividadEnum.CULTURAL)
+            zonas.add(zona);
+        else if (filtros.isSurfear() && zona.actividad == ActividadEnum.SURFEAR)
+            zonas.add(zona);
+        else if (filtros.isCataVinos() && zona.actividad == ActividadEnum.CATA_VINOS)
+            zonas.add(zona);
+        else if (filtros.isRecreativo() && zona.actividad == ActividadEnum.RECREATIVO)
+            zonas.add(zona);
+
+        return zonas;
+    }
+
+    private boolean isActividadesFalse(Filtros filtros) {
+        boolean actividades =
+                !filtros.isCaminata() && !filtros.isSenderismo() && !filtros.isEscalar() && !filtros.isAventura() && !filtros.isCultural() && !filtros.isSurfear() && !filtros.isCataVinos() && !filtros.isRecreativo();
+        return actividades;
+    }
+
+    private boolean isClimaFalse(Filtros filtros) {
+        boolean clima = !filtros.isSoleado() && !filtros.isNublado() && !filtros.isLluviaLigera();
+        return clima;
+    }
+
+    private boolean isFiltrosFasle(Filtros filtros) {
+        boolean actividades =
+                !filtros.isCaminata() && !filtros.isSenderismo() && !filtros.isEscalar() && !filtros.isAventura() && !filtros.isCultural() && !filtros.isSurfear() && !filtros.isCataVinos() && !filtros.isRecreativo();
+        boolean clima = !filtros.isSoleado() && !filtros.isNublado() && !filtros.isLluviaLigera();
+        return actividades && clima;
+    }
+
+    private boolean esLluviaLigera(ZonaTuristicaQuery zona) {
+        return utilsServcice.isLluviaLigera(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
+    }
+
+    private boolean esNublado(ZonaTuristicaQuery zona) {
+        return utilsServcice.isNublado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
+    }
+
+    private boolean esSoleado(ZonaTuristicaQuery zona) {
+        return utilsServcice.isSoleado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
+    }
+
+/*
     private List<ZonaTuristicaQuery> filtrar(List<ZonaTuristicaQuery> zonasQuery, Filtros filtros) {
         List<ZonaTuristicaQuery> zonas = new ArrayList<>();
         boolean nofiltros = isFiltrosFasle(filtros);
@@ -149,24 +238,6 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         }
         return zonas;
     }
-
-    private boolean isFiltrosFasle(Filtros filtros) {
-        boolean actividades =
-                !filtros.isCaminata() && !filtros.isSenderismo() && !filtros.isEscalar() && !filtros.isAventura() && !filtros.isCultural() && !filtros.isSurfear() && !filtros.isCataVinos() && !filtros.isRecreativo();
-        boolean clima = !filtros.isSoleado() && !filtros.isNublado() && !filtros.isLluviaLigera();
-        return actividades && clima;
-    }
-
-    private boolean esLluviaLigera(ZonaTuristicaQuery zona) {
-        return utilsServcice.isLluviaLigera(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
-    }
-
-    private boolean esNublado(ZonaTuristicaQuery zona) {
-        return utilsServcice.isNublado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
-    }
-
-    private boolean esSoleado(ZonaTuristicaQuery zona) {
-        return utilsServcice.isSoleado(zona.temperatura, (int) zona.intensidad, zona.probabilidad);
-    }
+ */
 
 }
