@@ -71,7 +71,7 @@ public class ReporteClimaService implements IReporteClimaService {
     }
 
     public String getUrl(int hora, double temperatura, double intensidad, int probabilidad) {
-        boolean esDeDia = hora < 16;
+        boolean esDeDia = hora < 19;
 
         return utilsServcice.getUrl(esDeDia, temperatura, (int) intensidad, probabilidad);
     }

@@ -778,6 +778,10 @@
         <h3>No hay zonas turísticas.</h3>
     </div>
 </div>
+
+
+    <br><br><br>
+
 </div>
 
 <script th:inline="javascript">
@@ -891,7 +895,7 @@
                     document.getElementById('esta_t3').style.display = 'none';
                 }
 
-                document.getElementById('pie-fondo-emergente').src = "/img/Estaciones/fondoT"+ubi+".jpg";
+                document.getElementById('pie-fondo-emergente').src = "/img/fondoE.jpg";
                 return;
             }
         }
@@ -943,11 +947,10 @@
     });
 </script>
 
-
 <!--filtros-->
 
 <div class="floating-filters">
-    <form method="post" th:object="${filtros}" action="/estaciones/filtrar-zonas/1" class="floating-filters-row">
+    <form method="post" th:object="${filtros}" th:action="@{/estaciones/filtrar-zonas/{id}(id=${idEstacion})}" class="floating-filters-row">
         <div class="section-block">
             <span class="mensajito">Los filtros se aplican por estación. Si selecciona otra estación, debería seleccionar los filtros otra vez. Si no tiene ninguna estación seleccionada, y presiona el filtro, automáticamente se filtrarán las zonas de la estación 1 Los Postes.</span>
             <span class="section-title">Actividades</span>
