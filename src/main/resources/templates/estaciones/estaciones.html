@@ -312,7 +312,7 @@
     <div class="stations-grid">
 
         <div class="station-card"  >
-            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(0).getIdEstacion()}+') ' + ${esta.get(0).getNombre()}"></label></div>
+            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'"><label th:text="${esta.get(0).getNombre()}"></label></div>
             <div class="weather-info"    th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(0).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(0).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(0).getTemperatura()}" class="weather-icon-texto"></label></div>
@@ -326,7 +326,7 @@
         </div>
 
         <div class="station-card" >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(1).getIdEstacion()}+') ' + ${esta.get(1).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'" ><label th:text="${esta.get(1).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(1).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(1).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(1).getTemperatura()}"></label></div>
@@ -340,7 +340,7 @@
         </div>
 
         <div class="station-card"  >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(2).getIdEstacion()}+') ' + ${esta.get(2).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'"><label th:text="${esta.get(2).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(2).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(2).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(2).getTemperatura()}"></label></div>
@@ -353,7 +353,7 @@
             </div>
         </div>
         <div class="station-card"  >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(3).getIdEstacion()}+') ' + ${esta.get(3).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'" ><label th:text="${esta.get(3).getNombre()}"></label></div>
             <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(3).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(3).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(3).getTemperatura()}"></label></div>
@@ -367,7 +367,7 @@
         </div>
 
         <div class="station-card"  >
-            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(4).getIdEstacion()}+') ' + ${esta.get(4).getNombre()}"></label></div>
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" ><label th:text="${esta.get(4).getNombre()}"></label></div>
             <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(4).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(4).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(4).getTemperatura()}"></label></div>
@@ -381,7 +381,7 @@
         </div>
 
         <div class="station-card"   >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(5).getIdEstacion()}+') ' + ${esta.get(5).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'"><label th:text="${esta.get(5).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(5).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(5).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(5).getTemperatura()}"></label></div>
@@ -394,7 +394,7 @@
             </div>
         </div>
         <div class="station-card"   >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(6).getIdEstacion()}+') ' + ${esta.get(6).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'"><label th:text="${esta.get(6).getNombre()}"></label></div>
             <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(6).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(6).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(6).getTemperatura()}"></label></div>
@@ -434,7 +434,7 @@
     <div class="stations-grid">
 
         <div class="station-card"  >
-            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(7).getIdEstacion()}+') ' + ${esta.get(7).getNombre()}"></label></div>
+            <div class="station-name"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'"><label th:text="${esta.get(7).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(7).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(7).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(7).getTemperatura()}"></label></div>
@@ -448,7 +448,7 @@
         </div>
 
         <div class="station-card"   >
-            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(8).getIdEstacion()}+') ' + ${esta.get(8).getNombre()}"></label></div>
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'"><label th:text="${esta.get(8).getNombre()}"></label></div>
             <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(8).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(8).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(8).getTemperatura()}"></label></div>
@@ -462,7 +462,7 @@
         </div>
 
         <div class="station-card"   >
-            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(9).getIdEstacion()}+') ' + ${esta.get(9).getNombre()}"></label></div>
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'"><label th:text="${esta.get(9).getNombre()}"></label></div>
             <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(9).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(9).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(9).getTemperatura()}"></label></div>
@@ -475,7 +475,7 @@
             </div>
         </div>
         <div class="station-card" >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(10).getIdEstacion()}+') ' + ${esta.get(10).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" ><label th:text="${esta.get(10).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(10).getIdEstacion()} + '\';'" >
                 <img th:src="@{${estaciones.get(10).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(10).getTemperatura()}"></label></div>
@@ -489,7 +489,7 @@
         </div>
 
         <div class="station-card"   >
-            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(11).getIdEstacion()}+') ' + ${esta.get(11).getNombre()}"></label></div>
+            <div class="station-name" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'"><label th:text="${esta.get(11).getNombre()}"></label></div>
             <div class="weather-info" th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(11).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(11).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(11).getTemperatura()}"></label></div>
@@ -503,7 +503,7 @@
         </div>
 
         <div class="station-card"  >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(12).getIdEstacion()}+') ' + ${esta.get(12).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'"><label th:text="${esta.get(12).getNombre()}"></label></div>
             <div class="weather-info"   th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(12).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(12).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(12).getTemperatura()}"></label></div>
@@ -516,7 +516,7 @@
             </div>
         </div>
         <div class="station-card"   >
-            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'"><label th:text="'('+${esta.get(13).getIdEstacion()}+') ' + ${esta.get(13).getNombre()}"></label></div>
+            <div class="station-name"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'"><label th:text="${esta.get(13).getNombre()}"></label></div>
             <div class="weather-info"  th:onclick="'window.location.href=\'/estaciones/' + ${esta.get(13).getIdEstacion()} + '\';'">
                 <img th:src="@{${estaciones.get(13).getIcono()}}" alt="climaicono" class="weather-icon">
                 <label th:text="${esta.get(13).getTemperatura()}"></label></div>
