@@ -27,16 +27,16 @@ public class UtilsServcice {
     public boolean isSoleado(double temperatura, int intensidad, int probabilidad) {
         if (intensidad == 0 && temperatura >= 20)
             return true;
-        if (intensidad >= 1 && intensidad <= 3) {
-            if (temperatura > 20 && probabilidad < 30)
-                return true;
-        }
         return false;
     }
 
     public boolean isNublado(double temperatura, int intensidad, int probabilidad) {
+        if (intensidad == 0 && temperatura < 20)
+            return true;
         if (intensidad >= 1 && intensidad <= 3) {
             if (temperatura < 20 && probabilidad < 30)
+                return true;
+            if (temperatura > 20 && probabilidad < 30)
                 return true;
         }
         return false;

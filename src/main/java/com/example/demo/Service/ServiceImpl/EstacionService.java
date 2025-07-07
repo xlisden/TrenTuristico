@@ -39,7 +39,7 @@ public class EstacionService implements IEstacionService {
     
     public String getUrl(int idEstacion, int hora) {
         AyudaClima clima = reporteClimaRepository.getClimaPorEstacionHora(idEstacion, hora);
-        boolean esDeDia = hora < 16;
+        boolean esDeDia = hora < 19;
         double temperatura = clima.getTemperatura();
         int intensidad = (int) clima.getIntensidad();
         int probabilidad = clima.getProbabilidad();

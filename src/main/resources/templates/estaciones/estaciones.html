@@ -93,6 +93,7 @@
     .boton svg {
         width: 20px;
         height: 20px;
+        color: white;
     }
     .mensajito {
         margin-top: -0.2rem;
@@ -125,7 +126,7 @@
     }
    #pie-fondo-emergente{
         position: absolute;
-                bottom: 40;
+        margin-bottom: 40px;
     }
     .ubi-tren{
         position: absolute;
@@ -593,7 +594,7 @@
     <!-- Tarjeta de elección (inicialmente oculta) -->
     <div id="eleccion-card" class="eleccion-card">
         <button class="close-btn" onclick="cerrarEleccion()">×</button>
-        <button id="btnPDF" class="close-btn" onclick="pdf()">Informe</button>
+<!--        <button id="btnPDF" class="close-btn" onclick="pdf()">Informe</button>-->
         <div class="card-content">
             <label id="card-label" class="card-label">  texto en el js ->>> </label>
             <span class="pasaje">Estación origen:</span> <label id="esta_o" >casa</label> <br><br>
@@ -602,7 +603,7 @@
             <span class="pasaje">Tiempo aprox. del viaje:</span><label id="esta_t2" >no data</label> <br><br>
             <span class="pasaje" id="esta_t3" style="display: none; color: darkred">¡ Luvia fuerte , tener precaución !</span> <br>
 
-            <img  alt="a" id="pie-fondo-emergente" th:src="@{/img/Estaciones/fondoT1.jpg}" height="110" width="400"  >
+            <img  alt="a" id="pie-fondo-emergente" th:src="@{/img/fondoE.jpg}" height="110" width="400"  >
         </div>
     </div>
 
@@ -613,6 +614,10 @@
 
         </div>
     </div>
+
+
+    <br><br><br>
+
 </div>
 
 <script th:inline="javascript">
@@ -690,9 +695,9 @@
             return `${hrs} h   ${min}min`;
         }
     }
-    function pdf(){
-
-    }
+    // function pdf(){
+    //
+    // }
 
     function t(ubi) {
         const des = ubi+1; // estación destino
@@ -727,7 +732,7 @@
                     document.getElementById('esta_t3').style.display = 'none';
                 }
 
-                document.getElementById('pie-fondo-emergente').src = "/img/Estaciones/fondoT"+ubi+".jpg";
+                document.getElementById('pie-fondo-emergente').src = "/img/fondoE.jpg";
                 return;
             }
         }
@@ -778,6 +783,7 @@
     });
 </script>
 
+<br><br><br>
 
 <!--filtros-->
 
