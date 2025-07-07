@@ -94,6 +94,12 @@
         width: 20px;
         height: 20px;
     }
+    .mensajito {
+        margin-top: -0.2rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+        color: #4a5568;
+    }
     @media (max-width: 700px) {
         .floating-filters-row {
             flex-direction: column;
@@ -766,6 +772,7 @@
 <div class="floating-filters">
     <form method="post" th:object="${filtros}" action="/estaciones/filtrar-zonas/1" class="floating-filters-row">
         <div class="section-block">
+            <span class="mensajito">Los filtros se aplican por estación. Si selecciona otra estación, debería seleccionar los filtros otra vez. Si no tiene ninguna estación seleccionada, y presiona el filtro, automáticamente se filtrarán las zonas de la estación 1 Los Postes.</span>
             <span class="section-title">Actividades</span>
             <div class="chip-checkbox-group">
                 <div class="chip-item">
@@ -803,6 +810,7 @@
             </div>
         </div>
         <div class="section-block">
+            <span class="mensajito"><br><br></span>
             <span class="section-title">Clima</span>
             <div class="chip-checkbox-group">
                 <div class="chip-item">
@@ -829,5 +837,6 @@
         </div>
     </form>
 </div>
+
 </body>
 </html>

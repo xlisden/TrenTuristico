@@ -112,13 +112,10 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
 
     private List<ZonaTuristicaQuery> filtrarZonasPorClimaActividad(List<ZonaTuristicaQuery> zonasQuery, Filtros filtros) {
         List<ZonaTuristicaQuery> zonas = new ArrayList<>();
-        boolean nofiltros = isFiltrosFasle(filtros);
         for (ZonaTuristicaQuery zona : zonasQuery) {
-            if (nofiltros) {
+            if (isFiltrosFalse(filtros)) {
                 return zonasQuery;
-            }
-
-            if (!isClimaFalse(filtros)) {
+            } else {
                 if (filtros.isLluviaLigera()) {
                     if (esLluviaLigera(zona) || esNublado(zona) || esSoleado(zona)) {
                         zonas = getZonaPorActividad(filtros, zonas, zona);
@@ -127,22 +124,25 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
                     if (esNublado(zona) || esSoleado(zona)) {
                         zonas = getZonaPorActividad(filtros, zonas, zona);
                     }
-                }
-                if (filtros.isSoleado()) {
+                } else if (filtros.isSoleado()) {
                     if (esSoleado(zona)) {
                         zonas = getZonaPorActividad(filtros, zonas, zona);
                     }
+                } else {
+                    zonas = getZonaPorActividad(filtros, zonas, zona);
                 }
-            } else {
-                zonas = getZonaPorActividad(filtros, zonas, zona);
             }
-
         }
         return zonas;
     }
 
     private List<ZonaTuristicaQuery> getZonaPorActividad(Filtros filtros, List<ZonaTuristicaQuery> zonas, ZonaTuristicaQuery zona) {
         if (isActividadesFalse(filtros)) {
+            zonas.add(zona);
+            return zonas;
+        }
+
+        if (isActividadesTrue(filtros)) {
             zonas.add(zona);
             return zonas;
         }
@@ -178,11 +178,17 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
         return clima;
     }
 
-    private boolean isFiltrosFasle(Filtros filtros) {
+    private boolean isFiltrosFalse(Filtros filtros) {
         boolean actividades =
                 !filtros.isCaminata() && !filtros.isSenderismo() && !filtros.isEscalar() && !filtros.isAventura() && !filtros.isCultural() && !filtros.isSurfear() && !filtros.isCataVinos() && !filtros.isRecreativo();
         boolean clima = !filtros.isSoleado() && !filtros.isNublado() && !filtros.isLluviaLigera();
         return actividades && clima;
+    }
+
+    private boolean isActividadesTrue(Filtros filtros) {
+        boolean actividades =
+                filtros.isCaminata() && filtros.isSenderismo() && filtros.isEscalar() && filtros.isAventura() && filtros.isCultural() && filtros.isSurfear() && filtros.isCataVinos() && filtros.isRecreativo();
+        return actividades;
     }
 
     private boolean esLluviaLigera(ZonaTuristicaQuery zona) {
