@@ -15,7 +15,7 @@ import java.io.Serializable;
 public interface EstacionRepository extends JpaRepository<Estacion, Serializable> {
     @Query(value = "select e.EstId , e.EstNombre, r.RepClimaTemp, (select count(*)\n" +
             "from zonaturistica z \n" +
-            "where z.ZonaEstacion = e.EstId ) as Zonas, 'url'\n" +
+            "where z.ZonaEstacion = e.EstId ) as Zonas, 'url',r.RepClimaIntensidadLluvia \n" +
             "from estacion e \n" +
             "inner join reporteclima r \n" +
             "on r.RepClimaEstacion = e.EstId\n" +
