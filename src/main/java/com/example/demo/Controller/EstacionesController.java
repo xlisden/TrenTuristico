@@ -7,6 +7,7 @@ import com.example.demo.Entity.extras.Filtros;
 import com.example.demo.Service.HorTrenService;
 import com.example.demo.Service.IEstacionService;
 import com.example.demo.Service.IZonaTuristicaService;
+import com.example.demo.Service.ServiceImpl.EstacionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,7 @@ public class EstacionesController {
     private final IEstacionService estacionService;
     private final IZonaTuristicaService zonaService;
     private final HorTrenService horTrenService;
-    private final int ubiPerson =  5;
+    private final int ubiPerson =  (int)(Math.random() * 14) + 1;
 
     @GetMapping("")
     public ModelAndView getEstaciones() {
