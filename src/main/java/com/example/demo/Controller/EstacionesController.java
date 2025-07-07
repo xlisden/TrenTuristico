@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class EstacionesController {
     private final IEstacionService estacionService;
     private final IZonaTuristicaService zonaService;
     private final HorTrenService horTrenService;
+    private final int ubiPerson =  5;
 
     @GetMapping("")
     public ModelAndView getEstaciones() {
@@ -30,6 +32,7 @@ public class EstacionesController {
         List<EstacionDto> estaciones = new ArrayList<>();
         try {
             estaciones = estacionService.getInfoEstaciones();
+            mav.addObject("ubiPerson",ubiPerson);
             mav.addObject("filtros", filtros);
             mav.addObject("estaciones", estaciones);
 
@@ -51,6 +54,7 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, null);
+            mav.addObject("ubiPerson",ubiPerson);
             mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
@@ -59,6 +63,15 @@ public class EstacionesController {
             mav.addObject("esta",estacionService.getInfoEstaciones());
             mav.addObject("horas",horTrenService.findAllHorarioTren());
             mav.addObject("zonas",zonaService.findAllZonaTuristica());
+
+
+            /*List<EstacionDto> as = estacionService.getInfoEstaciones();
+            for (int i = 0; i < as.size(); i++) {
+                System.out.println("inte: "+as.get(i).getIntensidad()+"   "+as.get(i).getNombre());
+            }*/
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,6 +86,7 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, filtros);
+            mav.addObject("ubiPerson",ubiPerson);
             mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
@@ -95,6 +109,7 @@ public class EstacionesController {
         try {
             estaciones = estacionService.getInfoEstaciones();
             zonas = zonaService.filtrarByEstacion(id, filtros);
+            mav.addObject("ubiPerson",ubiPerson);
             mav.addObject("zonasDaye", zonas);
             mav.addObject("idEstacion", id);
             mav.addObject("filtros", filtros);
