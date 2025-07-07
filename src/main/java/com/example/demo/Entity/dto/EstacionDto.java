@@ -19,17 +19,19 @@ public class EstacionDto implements Serializable {
     private int nroZonasTuristicas;
     private String icono;
     private String mensaje;
+    private double intensidad;
 
     public String getMensaje() {
         return (nroZonasTuristicas <= 0) ? "Esta estación no cuenta con zonas turísticas." : null;
     }
 
-    public EstacionDto(int idEstacion, String nombre, double temperatura, long nroZonasTuristicas, String icono) {
+    public EstacionDto(int idEstacion, String nombre, double temperatura, long nroZonasTuristicas, String icono,double intensidad) {
         this.idEstacion = idEstacion;
         this.nombre = nombre;
         this.temperatura = temperatura;
         this.nroZonasTuristicas = (int) nroZonasTuristicas;
         this.icono = icono;
+        this.intensidad = intensidad;
     }
 
 }
