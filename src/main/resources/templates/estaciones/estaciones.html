@@ -788,11 +788,34 @@
     async function descargarPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
+        const nume = 13;
 
         // Obtener el contenido
         const contenido = document.getElementById("areaPDF").innerText;
         const conte = document.getElementById("t"+nume.toString());
-        const canvas = await html2canvas(conte);
+
+        const originalStyle = conte.getAttribute("stylepagina")
+
+        conte.style.transform = "scale(2)";
+        conte.style.transformOrigin = "top left";
+        conte.style.margin = "20px";
+        conte.style.backgroundColor = "white";
+        conte.style.padding = "10px";
+        conte.style.fontSize = "2rem";
+
+        // conte.
+        const canvas = await html2canvas(conte, {
+            scale: 1, // duplica resolución
+            useCORS: true
+        });
+
+        // ✅ Restauramos estilo original
+        if (originalStyle !== null) {
+            conte.setAttribute("style", originalStyle);
+        } else {
+            conte.removeAttribute("style");
+        }
+
         const imgData = canvas.toDataURL("image/png");
         const conte2 = document.getElementById("pie-fondo-emergente");
         const canvas2 = await html2canvas(conte2);
@@ -800,11 +823,12 @@
 
         // Agregar al PDF
         doc.text(contenido, 10, 20);
-        doc.text("Clima y temperatura de la estacion destino :", 10, 103);
-        doc.addImage(imgData, 'PNG', 10, 104);
-        doc.addImage(imgData2, 'PNG', 10, 116);
+        doc.text("Clima y temperatura de la estacion destino :", 10, 80);
+        // doc.addImage(imgData, 'PNG', 10, 104, 100, 100);
+        doc.addImage(imgData, 'PNG', 10, 100, 40, 15);
+        doc.addImage(imgData2, 'PNG', 10, 120);
         // Guardar
-        doc.save("miArchivo.pdf");
+        doc.save("informe.pdf");
     }
 </script>
 
