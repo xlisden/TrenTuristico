@@ -13,7 +13,12 @@ import com.example.demo.Service.IZonaTuristicaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,12 +71,43 @@ public class ZonaTuristicaService implements IZonaTuristicaService {
     }
 
     @Override
-    public void guardarZona(ZonaTuristica zona) {
-        zonaRepository.save(zona);
+    public ZonaTuristica guardarZona(ZonaTuristica zona, MultipartFile foto) {
+
+         return zonaRepository.save(zona);
+
+
+    }
+    public String nombreFoto(MultipartFile foto, int id) {
+
+        if (!foto.isEmpty()) {
+            try {
+                String originalFilename = foto.getOriginalFilename();
+                String extension = "";
+                int i = originalFilename.lastIndexOf('.');
+                if (i > 0) {
+                    extension = originalFilename.substring(i);
+                }
+                if (extension.equals(".jpg")|| extension.equals(".jpeg") || extension.equals(".png") || extension.equals(".webp") || extension.equals(".svg")) {
+                    Path filePath = Paths.get("src/main/resources/static/img/zonas/z" + id+ ".jpg");
+                    Files.copy(foto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                    return "z"+id + ".jpg";
+                } else {
+                    System.out.println("formato no valida");
+                    return "ddd.png";
+                }
+            } catch (Exception e) {
+                System.out.println("error al cargar la foto: " + e.getMessage());
+                return "ddd.png";
+            }
+        } else {
+            System.out.println("foto por deafault asignada");
+            return "ddd.png";
+        }
     }
 
     @Override
-    public void actualizarZona(ZonaTuristica zona) {
+    public void actualizarZona(ZonaTuristica zona,MultipartFile foto) {
+        System.out.println(nombreFoto(foto,zona.getId()));
         zonaRepository.save(zona);
     }
 

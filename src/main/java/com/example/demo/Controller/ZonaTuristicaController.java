@@ -5,6 +5,7 @@ import com.example.demo.Entity.ZonaTuristica;
 import com.example.demo.Service.ActividadService;
 import com.example.demo.Service.IZonaTuristicaService;
 import com.example.demo.Service.ServiceImpl.EstacionService;
+import com.example.demo.Service.ServiceImpl.ZonaTuristicaService;
 import com.example.demo.Service.TipoLugarService;
 import com.example.demo.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Controller
 @RequestMapping("/zona")
@@ -54,9 +61,9 @@ public class ZonaTuristicaController {
 	}
 
 	@PostMapping("/pcrear")
-	public String guardarZona(@ModelAttribute ZonaTuristica zona, RedirectAttributes redirectAttributes) {
+	public String guardarZona(@RequestParam(name = "file", required = false) MultipartFile foto, @ModelAttribute ZonaTuristica zona, RedirectAttributes redirectAttributes) {
 		try {
-			zona.setActivo(true);
+			  zona.setActivo(true);
 
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String username = authentication.getName();
@@ -66,12 +73,40 @@ public class ZonaTuristicaController {
 
 			zona.setCreadoPor(usuario);
 
-			zonaService.guardarZona(zona);
+			ZonaTuristica zo =  zonaService.guardarZona(zona,foto);
+			nombreFoto(foto,zo.getId());
 			redirectAttributes.addFlashAttribute("mensaje", "Zona turística creada exitosamente");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", "Error al guardar la zona: " + e.getMessage());
 		}
 		return "redirect:/zona/lista";
+	}
+	public String nombreFoto(MultipartFile foto, int id) {
+
+		if (!foto.isEmpty()) {
+			try {
+				String originalFilename = foto.getOriginalFilename();
+				String extension = "";
+				int i = originalFilename.lastIndexOf('.');
+				if (i > 0) {
+					extension = originalFilename.substring(i);
+				}
+				if (extension.equals(".jpg")|| extension.equals(".jpeg") || extension.equals(".png") || extension.equals(".webp") || extension.equals(".svg")) {
+					Path filePath = Paths.get("src/main/resources/static/img/zonas/z" + id+ ".jpg");
+					Files.copy(foto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+					return "z"+id + ".jpg";
+				} else {
+					System.out.println("formato no valida");
+					return "ddd.png";
+				}
+			} catch (Exception e) {
+				System.out.println("error al cargar la foto: " + e.getMessage());
+				return "ddd.png";
+			}
+		} else {
+			System.out.println("foto por deafault asignada");
+			return "ddd.png";
+		}
 	}
 
 	@GetMapping("/ver/{id}")
@@ -110,7 +145,7 @@ public class ZonaTuristicaController {
 	}
 
 	@PostMapping("/editar/{id}")
-	public String actualizarZona(@ModelAttribute ZonaTuristica zona, @PathVariable int id, RedirectAttributes redirectAttributes) {
+	public String actualizarZona(@RequestParam(name = "file", required = false) MultipartFile foto,@ModelAttribute ZonaTuristica zona, @PathVariable int id, RedirectAttributes redirectAttributes) {
 		try {
 			ZonaTuristica existente = zonaService.obtenerZonaPorId(id);
 			if (existente == null) {
@@ -120,7 +155,7 @@ public class ZonaTuristicaController {
 
 			zona.setId(id);
 			zona.setCreadoPor(existente.getCreadoPor()); // se mantiene el creador original
-			zonaService.actualizarZona(zona);
+			zonaService.actualizarZona(zona,foto);
 
 			redirectAttributes.addFlashAttribute("mensaje", "Zona turística actualizada exitosamente");
 		} catch (Exception e) {

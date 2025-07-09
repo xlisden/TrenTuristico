@@ -754,7 +754,7 @@
     <div th:each="zona : ${zonasDaye}" th:object="${zona}">
         <div class="zona-tarjeta">
             <div class="zona-tarjeta__imagen">
-                <img th:src="@{'/img/zonas/z' + ${zona.idZona} + '.jpg'}" />
+                <img th:src="@{'/img/zonas/z' + ${zona.idZona} + '.jpg'}" width="350" height="79.42"/>
             </div>
 
             <div class="zona-tarjeta__contenido">
@@ -953,14 +953,40 @@
         // Actualiza constantemente (ideal si hay movimiento o animaciones)
         setInterval(updatePosition, 16); // 60 FPS (~16ms)
     });
+
     async function descargarPDF() {
+        console.log("ayudaaaaaaaaaaaaaaaaa");
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
         // Obtener el contenido
         const contenido = document.getElementById("areaPDF").innerText;
         const conte = document.getElementById("t"+nume2.toString());
-        const canvas = await html2canvas(conte);
+
+        const originalStyle = conte.getAttribute("stylepagina")
+
+        conte.style.transform = "scale(2)";
+        conte.style.transformOrigin = "top left";
+        conte.style.margin = "20px";
+        conte.style.backgroundColor = "white";
+        conte.style.padding = "10px";
+        conte.style.fontSize = "2rem";
+
+        // conte.
+        const canvas = await html2canvas(conte, {
+            scale: 1, // duplica resolución
+            useCORS: true
+        });
+
+        // ✅ Restauramos estilo original
+        if (originalStyle !== null) {
+            conte.setAttribute("style", originalStyle);
+        } else {
+            conte.removeAttribute("style");
+        }
+
+
+        // const canvas = await html2canvas(conte);
         const imgData = canvas.toDataURL("image/png");
         const conte2 = document.getElementById("pie-fondo-emergente");
         const canvas2 = await html2canvas(conte2);
@@ -968,9 +994,10 @@
 
         // Agregar al PDF
         doc.text(contenido, 10, 20);
-        doc.text("Clima y temperatura de la estacion destino :", 10, 103);
-        doc.addImage(imgData, 'PNG', 10, 104);
-        doc.addImage(imgData2, 'PNG', 10, 116);
+        doc.text("Clima y temperatura de la estacion destino :", 10, 70);
+        // doc.addImage(imgData, 'PNG', 10, 104, 100, 100);
+        doc.addImage(imgData, 'PNG', 10, 130, 40, 15);
+        doc.addImage(imgData2, 'PNG', 10, 150);
         // Guardar
         doc.save("informe.pdf");
     }

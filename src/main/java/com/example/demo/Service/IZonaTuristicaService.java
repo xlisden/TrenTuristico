@@ -8,6 +8,7 @@ import com.example.demo.Entity.dto.ZonaDto;
 import com.example.demo.Entity.dto.ZonaTuristicaDto;
 import com.example.demo.Entity.extras.Filtros;
 import com.example.demo.Entity.extras.ZonaTuristicaQuery;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface IZonaTuristicaService {
 
@@ -19,7 +20,7 @@ public interface IZonaTuristicaService {
 
     public abstract List<ZonaTuristica> listarZonas();
     public abstract ZonaTuristica obtenerZonaPorId(int id);
-    public abstract void guardarZona(ZonaTuristica zona);
-    public abstract void actualizarZona(ZonaTuristica zona);
+    public abstract ZonaTuristica guardarZona(ZonaTuristica zona, MultipartFile foto);
+    public abstract void actualizarZona(ZonaTuristica zona,MultipartFile foto);
     public abstract void desactivarZona(int id);
 }

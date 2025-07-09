@@ -786,13 +786,14 @@
     });
 
     async function descargarPDF() {
+
+        console.log("ayudaaaaaaaaaaaaaaaaa");
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        const nume = 13;
 
         // Obtener el contenido
         const contenido = document.getElementById("areaPDF").innerText;
-        const conte = document.getElementById("t"+nume.toString());
+        const conte = document.getElementById("t"+nume2.toString());
 
         const originalStyle = conte.getAttribute("stylepagina")
 
@@ -823,10 +824,10 @@
 
         // Agregar al PDF
         doc.text(contenido, 10, 20);
-        doc.text("Clima y temperatura de la estacion destino :", 10, 80);
+        doc.text("Clima y temperatura de la estacion destino :", 10, 70);
         // doc.addImage(imgData, 'PNG', 10, 104, 100, 100);
-        doc.addImage(imgData, 'PNG', 10, 100, 40, 15);
-        doc.addImage(imgData2, 'PNG', 10, 120);
+        doc.addImage(imgData, 'PNG', 10, 110, 40, 15);
+        doc.addImage(imgData2, 'PNG', 10, 150);
         // Guardar
         doc.save("informe.pdf");
     }

@@ -10,7 +10,7 @@
 <div class="container mt-4">
     <h2>Editar Zona Turística</h2>
 
-    <form th:action="@{/zona/editar/{id}(id=${zona.id})}" th:object="${zona}" method="post">
+    <form th:action="@{/zona/editar/{id}(id=${zona.id})}" th:object="${zona}" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Nombre</label>
             <input type="text" th:field="*{nombre}" class="form-control" required>
@@ -45,6 +45,12 @@
             <select th:field="*{tipoLugar}" class="form-select" required>
                 <option th:each="t : ${tiposLugar}" th:value="${t.id}" th:text="${t.nombre}" th:selected="${t.id == zona.tipoLugar?.id}"></option>
             </select>
+        </div>
+
+
+        <div class="mb-3">
+            <label class="form-label">Foto de la Zona turistica  (vista horizontal 350x80)</label>
+            <input type="file" name="file" class="form-control" required>
         </div>
 
         <div class="form-check mb-3">

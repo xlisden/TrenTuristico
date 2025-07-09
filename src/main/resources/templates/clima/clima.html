@@ -132,6 +132,11 @@
     max-width: 370px;
   }
 
+  .mensajito {
+    color: #4a5568;
+    font-size: 0.8rem;
+  }
+
   @media (max-width: 1000px) {
     .stations-row {
       flex-direction: column;
@@ -147,6 +152,7 @@
 <div th:replace="~{compartidos/header :: header()}"></div>
 <div class="container">
   <h1>Pronóstico del Clima</h1>
+  <p class="mensajito">Proporcionado por SENHAMI</p>
   <div th:each="dia : ${ clima.semana }">
     <section class="day-section">
       <div class="day-header">
